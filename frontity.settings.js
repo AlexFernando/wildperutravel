@@ -2,55 +2,35 @@ const settings = {
   "name": "wildperutravel",
   "state": {
     "frontity": {
-      "url": "https://test.frontity.org",
-      "title": "Test Frontity Blog",
-      "description": "WordPress installation for Frontity development"
+      "url": "https://restapi.wildfreewalkingtours.com/",
+      "title": "Wild Peru Travel",
+      "description": "WordPress installation for Wild Peru Travel Website"
     }
   },
   "packages": [
     {
-      "name": "@frontity/mars-theme",
-      "state": {
-        "theme": {
-          "menu": [
-            [
-              "Home",
-              "/"
-            ],
-            [
-              "Nature",
-              "/category/nature/"
-            ],
-            [
-              "Travel",
-              "/category/travel/"
-            ],
-            [
-              "Japan",
-              "/tag/japan/"
-            ],
-            [
-              "About Us",
-              "/about-us/"
-            ]
-          ],
-          "featured": {
-            "showOnList": false,
-            "showOnPost": false
-          }
-        }
-      }
+      "name": "wildperutheme",
     },
     {
       "name": "@frontity/wp-source",
       "state": {
         "source": {
-          "url": "https://test.frontity.org"
+          "api": "https://restapi.wildfreewalkingtours.com/wp-json/",
+
+          "postTypes": [
+
+            {
+              type: "alltours",
+              endpoint: "alltours",
+              archive: "alltours",
+            },
+          ],
         }
       }
     },
     "@frontity/tiny-router",
-    "@frontity/html2react"
+    "@frontity/html2react",
+    "@aamodtgroup/frontity-contact-form-7"
   ]
 };
 
