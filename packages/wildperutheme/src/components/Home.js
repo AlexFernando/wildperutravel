@@ -13,13 +13,28 @@ import { faSearchPlus, faMobileAlt, faShoppingCart, faHeart, faClock } from '@fo
 
 import Loading from './Loading';
 
+import {bookAdventure, ourTours, viewMore} from '../Root';
+
+import CarouselBackground from './CarouselBackground';
+
 const HomePage = ({state, actions}) => {
 
+    const arrIcons = [faSearchPlus, faMobileAlt, faShoppingCart, faHeart]
+
+    const pageHome = state.source.page[19];
+
     useEffect( () => {
-        actions.source.fetch("/alltours")
+
+        if(state.theme.lang === "en") {
+            actions.source.fetch("/alltours")
+        }
+
+        else {
+            actions.source.fetch("/es/alltours")
+        }
     }, [])
 
-    const data = state.source.get('/alltours')
+    const data = state.theme.lang === "en" ? state.source.get('/alltours') : state.source.get('/es/alltours')
 
     let tours = [];
 
@@ -34,14 +49,11 @@ const HomePage = ({state, actions}) => {
         })
     }
 
-
-    const pageHome = state.source.page[19];
-
     return ( 
         <>           
         {typeof pageHome === "undefined" ? <Loading /> : 
         <>
-            <BackgroundColor background = {pageHome.acf.img_background.sizes.large}>          
+            {/* <BackgroundColor background = {pageHome.acf.img_background.sizes.large}>          
                 <MainContainer>
 
                     <h1>{pageHome.acf.main_title}</h1>
@@ -50,58 +62,52 @@ const HomePage = ({state, actions}) => {
                         {pageHome.acf.slogan}
                     </p>
                     <div>
-                        <LinkButtonHomeSecond href="/fulltours">Book Your Adventure</LinkButtonHomeSecond>
+                        <LinkButtonHomeSecond href="/fulltours">{bookAdventure}</LinkButtonHomeSecond>
                     </div>
                     
                 </MainContainer>
-            </BackgroundColor>  
+            </BackgroundColor>   */}
+
+            
+            <CarouselBackground />
 
             <AboutContainer>
                 <h2>
                     {pageHome.acf.about_title}
                 </h2>
-                <hr></hr>
+              
                 <p>
                     {pageHome.acf.description_about}
                 </p>
 
                 <div>
-                    <LinkButtonHome href="/fulltours">Our Tours</LinkButtonHome>
+                    <LinkButtonHome href="/fulltours">{ourTours}</LinkButtonHome>
                 </div>
                     
             </AboutContainer>
 
             <ToursContainer>
-                <h2>It's easy to get to your new Adventure</h2>
-                <hr></hr>
-
+                <h2>{pageHome.acf.title_third_section}</h2>
+             
                 <IconsContainer>
-                    <IconsInfo>
-                        <FontAwesomeIconStyled icon={faSearchPlus} />
-                        <h3>Look for your tour</h3>
-                        <p>Different packages to fit with your time and budget.</p>
-                    </IconsInfo>
 
-                    <IconsInfo>
-                        <FontAwesomeIconStyled icon={faMobileAlt} />
-                        <h3>Book in advance</h3>
-                        <p>Book your tour now and We keep in contact.</p>
-                    </IconsInfo>
-
-                    <IconsInfo>
-                        <FontAwesomeIconStyled icon={faShoppingCart} />
-                        <h3>Online Payment</h3>
-                        <p>You can pay with our differents payment online methods.</p>
-                    </IconsInfo>
-
-                    <IconsInfo>
-                        <FontAwesomeIconStyled icon={faHeart} />
-                        <h3>Be prepare to enjoy!</h3>
-                        <p>We'll provide you with all the details, so you can have the best experience!.</p>
-                    </IconsInfo>
+                    {
+                        Object.keys(pageHome.acf.icons_text_containter).map( (elem, idx) => {
+                            return(
+                                <IconsInfo>
+                                    <FontAwesomeIconStyled icon = {arrIcons[idx]} />
+                                    <h3>{pageHome.acf.icons_text_containter[elem].title}</h3>
+                                    <p>{pageHome.acf.icons_text_containter[elem].paragraph}</p>
+                                </IconsInfo>
+                              
+                            )
+                        })
+                    }
                 </IconsContainer>
 
-                <h2>OUR TOURS</h2>
+
+
+                <h2>{ourTours}</h2>
                 <hr></hr>
 
                 {
@@ -115,18 +121,25 @@ const HomePage = ({state, actions}) => {
                                     
                                         <TourItem>
                                             <Link href={tour.link}>
-                                            
-                                            
-                                            <ImageTourStyled src={tour.acf.image_tour.sizes.medium} />
-                                            
-                                            <h3>{tour.acf.title}</h3>
+                                                                                        
+                                                <ImageTourStyled src={tour.acf.image_tour.sizes.medium} />
 
-                                            <p>{tour.acf.description}</p>
-                                            
-                                            <div>
-                                                <p><FontAwesomeCardTour icon={faClock} />{tour.acf.full_days}</p>
-                                                <span>US$&nbsp;{tour.acf.price}</span>
-                                            </div>
+                                                <InfoTour>
+                                                    <h3>{tour.acf.title}</h3>
+
+                                                    <p>{tour.acf.description}</p>
+                                                    
+                                                    <div>
+                                                        <p><FontAwesomeCardTour icon={faClock} />{tour.acf.full_days}</p>
+                                                        <span>{tour.acf.price}</span>
+                                                    </div>
+
+                                                    <ViewMoreWrapper>
+                                                        <LinkButtonHomeSecond href={tour.link}>{viewMore}</LinkButtonHomeSecond>    
+                                                    </ViewMoreWrapper>                                            
+                                                </InfoTour>
+
+                                             
                                             </Link>
                                         </TourItem>
                                    
@@ -139,10 +152,7 @@ const HomePage = ({state, actions}) => {
                 }
 
 
-            </ToursContainer>
-
-
-           
+            </ToursContainer>           
         </>
         }
         </>
@@ -196,14 +206,14 @@ const MainContainer = styled.div`
             }
         }
 
-        hr {
+        /* hr {
             display: flex;
             width: 3.25rem;
             border-width: .2rem;
             border-color: #f4623a;
             border-top: 1px solid rgba(0,0,0,.1);
-            margin: 1.5rem 0;
-        }
+            margin: 5rem 0;
+        } */
 
         p {
             margin-top: 0;
@@ -232,19 +242,6 @@ const MainContainer = styled.div`
             }
         }
 
-`
-
-const ImageStyledHome = styled(Image)`
-    display: flex;
-    justify-content: center;
-    align-self: center;
-    margin-top: 10rem;
-    max-height: 60%;
-    max-width: 50%;
-
-    @media(max-width: 768px) {
-        margin-top: 2rem;
-    }
 `
 
 export const AboutContainer = styled.div`
@@ -297,7 +294,7 @@ export const ToursContainer = styled.div`
     flex-direction: column;
     justify-content: center;
     background-color: #fff;
-    padding: 2rem 15rem;
+    padding: 2rem 10rem;
 
     @media(max-width: 768px) {
         padding: 2rem 0;
@@ -305,17 +302,17 @@ export const ToursContainer = styled.div`
 
     h2{
         font-size: 2rem;
-        color: #000;
+        color: #454545;
         text-align: center;
         font-weight: 400;
     }
 
     hr {
-        display: flex;
-        width: 3.25rem;
+       
+        width: 3.5rem;
         border-width: .2rem;
         border-color: #f4623a;
-        border-top: 1px solid rgba(0,0,0,.1);
+        background-color:#f4623a ;
         align-self: center;
     }
 
@@ -374,22 +371,38 @@ export const FontAwesomeCardTour = styled(FontAwesomeIcon)`
 `
 
 export const ToursWrap = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 2rem;
+    background-color: #fff;
+    color: #444;
+    margin: 4rem 0;
 
-    @media(max-width: 768px) {
-        flex-direction: column;
+    @media (max-width: 768px){
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 1rem;
+        margin: 2rem 0;
     }
 `;
 
 export const TourItem = styled.div`
     margin: 2rem 2rem;
-    flex-basis: 25%;
+    box-shadow: grey 0px 15px 30px 1px;
+    border-radius: .5rem;
+`;
+
+export const InfoTour = styled.div`
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1.2rem;
+    line-height: 1.5;
 
     h3{
         color: #3A6F84;
+    }
+
+    p {
+        margin-bottom: 2rem;
     }
 
     div {
@@ -403,15 +416,21 @@ export const TourItem = styled.div`
         }
 
         span {
-            color:  #3A6F84;
+            color:#3A6F84;
             font-weight: bold;
         }
     }
-`;
+
+`
+
+export const ViewMoreWrapper = styled.div`
+    align-self: center;
+`
 
 export const ImageTourStyled = styled(Image)`
     width: 100%;
     height: 20.625rem;
     object-fit: cover;
     object-position: 50% 50%;
+    border-radius: .5rem .5rem 0 0;
 `

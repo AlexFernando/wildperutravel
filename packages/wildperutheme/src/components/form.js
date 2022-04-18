@@ -6,7 +6,13 @@ import Loading from './Loading';
 const stayInTouch = ({state, actions, libraries}) => {
 
     useEffect( () => {
-        actions.source.fetch("/contact")
+        if(state.theme.lang === "en") {
+            actions.source.fetch("/contact")
+        }
+   
+        else {
+            actions.source.fetch("/es/contact")
+        }
     }, [])
 
     const Html2react = libraries.html2react.Component;
@@ -16,12 +22,12 @@ const stayInTouch = ({state, actions, libraries}) => {
     return ( 
 
         <>
-        {typeof contentForm === "undefined" ? <Loading /> 
-            :
+            {typeof contentForm === "undefined" ? <Loading /> 
+                :
                 <Content>
-                <Html2react html={contentForm.content.rendered} />
+                    <Html2react html={contentForm.content.rendered} />
                 </Content>
-        }
+            }
         </>
     );
 }
@@ -30,6 +36,7 @@ const Content = styled.div`
 
     font-size: 1.5rem;
     padding-left: 2rem;
+    margin-top: 2rem;
 
     input, textarea {
         margin:1rem 1rem 2rem 1rem;
