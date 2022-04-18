@@ -8,13 +8,64 @@ import TourDetails from './components/ToursDetails';
 import MachuPicchu from './components/MachuPicchu';
 import AllTours from './components/AllTours';
 import ContactTours from './components/ContactTours';
+import Header from './components/header/header';
+import Sacredvalley from './components/SacredValley';
+import AdventuresTours from './components/AdventuresTours'
 
+export let bookAdventure = '';
+export let ourTours = '';
+export let viewMore = '';
+export let bookTour = '';
+export let description = '';
+export let itinerary = '';
+export let include = '';
+export let price = '';
+export let destacado = '';
+export let notInclude = '';
+export let startTime = '';
+export let endTime = '';
+
+ 
 const Root = ({state, actions}) => {
 
     const data = state.source.get(state.router.link);
 
     useEffect( () => {
-        actions.source.fetch("/homepage")
+        // actions.source.fetch("/homepage")
+        // actions.source.fetch("/es/homepage");
+
+        if( state.theme.lang === "en") {
+            actions.source.fetch("/homepage")
+            bookAdventure = 'BOOK YOUR ADVENTURE'
+            ourTours = 'OUR TOURS'
+            viewMore = 'VIEW MORE'
+            bookTour = 'BOOK YOUR TOUR'
+            description = 'Description'
+            itinerary = 'Itinerary'
+            include = 'Include'
+            notInclude = 'Not Include'
+            destacado = 'The Most Outstanding'
+            price = 'Price'
+            startTime = 'Start Time'
+            endTime = 'End Time'
+        }
+
+        else if (state.theme.lang === "es") {
+            actions.source.fetch("/es/homepage");
+            bookAdventure = 'RESERVA TU AVENTURA'
+            ourTours = 'NUESTROS TOURS'
+            viewMore = 'VER MÁS'
+            bookTour = 'RESERVA UN TOUR'
+            description = 'Descripción'
+            itinerary = 'Itinerario'
+            include = 'Incluye'
+            notInclude = 'No Incluye'
+            destacado = 'Lo Más Destacado'
+            price = 'Precio'
+            startTime = 'Inicio'
+            endTime = 'Final'
+
+        }
     }, [])
 
     
@@ -23,6 +74,13 @@ const Root = ({state, actions}) => {
       <Global
                 styles={css`
 
+                    :root {
+                        --brand: #0c884a; //#5B3BE8;
+                        
+                        --black: #000000;
+                        --white: #ffffff;
+                        --bodycolor: #343434;
+                    }
                     body {
                         margin: 0;
                         font-family: 'Montserrat', sans-serif;
@@ -32,10 +90,10 @@ const Root = ({state, actions}) => {
                     }
 
                 
-                    /* * {
+                     /* * {
                         border: 1px solid #f00 !important;
-                    }  
-                     */
+                    }    */
+                     
                     p {
                         font-family: 'Montserrat', sans-serif;
                         font-weight: 400;
@@ -50,19 +108,29 @@ const Root = ({state, actions}) => {
             </Head>
 
         {/** Navbar */}       
-        <NavBar />
+        {/* <NavBar /> */}
 
+        <Header />
         {data.isHomePage && <HomePage /> }
 
         {data.isTourDetails && <TourDetails /> }
 
         {state.router.link === "/machupicchu/" && <MachuPicchu />}
+        {state.router.link === "/es/machupicchu/" && <MachuPicchu />}
+
+        {state.router.link === "/sacredvalley/" && <Sacredvalley />}
+        {state.router.link === "/es/sacredvalley/" && <Sacredvalley />}
+
+        {state.router.link === "/adventuretours/" && <AdventuresTours />}
+        {state.router.link === "/es/adventuretours/" && <AdventuresTours />}
 
         {state.router.link === "/fulltours/" && <AllTours />}
+        {state.router.link === "/es/fulltours/" && <AllTours />}
 
         {data.isAlltours && <TourDetails />}
 
         {state.router.link === "/contact-tour/" && <ContactTours />}
+        {state.router.link === "/es/contact-tour/" && <ContactTours />}
         {/**Other components */}
 {/*         
         {data.isFullProgram && <AllEvents />}  

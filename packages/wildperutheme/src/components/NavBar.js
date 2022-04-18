@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {css, connect, styled } from "frontity";
 import Link from './Link'
 import Image from '@frontity/components/image';
-import Logo from '../images/logo.jpeg'
+// import Logo from '../static/images/logo.jpeg'
 
 const NavBar = () => {
 
@@ -11,44 +11,46 @@ const NavBar = () => {
     return ( 
         
         <Navigation>
+          
             <Link href="/"><ImageLogo src={Logo}/></Link>
-        <Toggle
-            navbarOpen={navbarOpen}
-            onClick={() => setNavbarOpen(!navbarOpen)}
-        >
-            {navbarOpen ? <Hamburger open /> : <Hamburger />}
-        </Toggle>  
 
-      {navbarOpen ? (
-        <>             
-            <Navbox>
-                <Button onClick = {() => setNavbarOpen(!navbarOpen)}>
-                    <Link href= "/">About</Link>
-                </Button> 
-                <Button onClick = {() => setNavbarOpen(!navbarOpen)}> 
-                    <Link href= "/fulltours">Tours</Link>
-                </Button>   
-                <Button onClick = {() => setNavbarOpen(!navbarOpen)}>
-                    <Link href="/machupicchu">Machu Picchu</Link>
-                </Button>
-                <Button onClick = {() => setNavbarOpen(!navbarOpen)}>
-                    <Link href="/contact-tour">Contact</Link>
-                </Button>
-            </Navbox>
-        </>
+            <Toggle
+                navbarOpen={navbarOpen}
+                onClick={() => setNavbarOpen(!navbarOpen)}
+            >
+                {navbarOpen ? <Hamburger open /> : <Hamburger />}
+            </Toggle>  
 
-      ) : (
-        <>
-        <Navbox open>
-          <Button><Link href= "/">About</Link></Button> 
-          <Button><Link href="/fulltours">Tours</Link></Button> 
-          <Button> <Link href= "/machupicchu">Machu Picchu</Link></Button> 
-          <Button> <Link href= "/contact-tour">Contact</Link></Button> 
-        </Navbox>
-  </>
-      )}
+            {navbarOpen ? (
+              <>             
+                  <Navbox>
+                      <Button onClick = {() => setNavbarOpen(!navbarOpen)}>
+                          <Link href= "/">About</Link>
+                      </Button> 
+                      <Button onClick = {() => setNavbarOpen(!navbarOpen)}> 
+                          <Link href= "/fulltours">Tours</Link>
+                      </Button>   
+                      <Button onClick = {() => setNavbarOpen(!navbarOpen)}>
+                          <Link href="/machupicchu">Machu Picchu</Link>
+                      </Button>
+                      <Button onClick = {() => setNavbarOpen(!navbarOpen)}>
+                          <Link href="/contact-tour">Contact</Link>
+                      </Button>
+                  </Navbox>
+              </>
+
+            ) : (
+              <>
+              <Navbox open>
+                <Button><Link href= "/">About</Link></Button> 
+                <Button><Link href="/fulltours">Tours</Link></Button> 
+                <Button> <Link href= "/machupicchu">Machu Picchu</Link></Button> 
+                <Button> <Link href= "/contact-tour">Contact</Link></Button> 
+              </Navbox>
+              </>
+            )}
       
-    </Navigation>
+        </Navigation>
      );
 
 }
@@ -198,6 +200,7 @@ const Hamburger = styled.div`
           width: 140px;
           height: 140px;
           margin-top: 0;
+          margin-left: 10rem;
     }
   `
  

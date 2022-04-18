@@ -1,13 +1,19 @@
-import React, {useEffect} from 'react';
-import { connect, styled, css } from "frontity";
+import React, {useState, useEffect} from 'react';
+import { connect, styled, css, Global } from "frontity";
+import Link from './Link'
 
 //icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDotCircle, faMapMarkerAlt, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
 
-//form tour
-import FormTour from './FormTours';
+import LinkButtonHomeSecond from './LinkButtonHomeSecond'
 
+// react tab tab
+// import {Tabs, TabList, Tab, PanelList, Panel} from 'react-tabtab';
+// import * as customStyle from 'react-tabtab/lib/themes/bulma/index';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import {bookTour, description, itinerary, include, destacado, notInclude, price, startTime , endTime} from '../Root'
+import MyTabsStyles from 'react-tabs/style/react-tabs.css';
 
 const TourDetails = ({state, actions}) => {
 
@@ -17,116 +23,168 @@ const TourDetails = ({state, actions}) => {
 
     const postTour = state.source.alltours[idTour];
 
-    console.log("Detailed Tour: ", postTour);
-
     const summaryItems = postTour.acf.important_summary_items.split(";");
 
     const includeList = postTour.acf.include_list.split(";");
 
     const nonIncludeList = postTour.acf.not_include_list.split(";");
 
-    console.log("summary", summaryItems, " ", includeList, " ", nonIncludeList);
+    const priceDetails = postTour.acf.price_details.split(";");
 
     return (
+   
         <DetailsContainer>
-            
-            <DescriptionContainer>
-                <h2>{postTour.acf.title}</h2>
-                <div>
-                    <p>
-                        {postTour.acf.description}
-                    </p>
+  
+            <DescriptionContainer>   <h2>{postTour.acf.title}</h2></DescriptionContainer>
+
+            <Global styles={MyTabsStyles} />       
+
+            <Tabs>
+                <TabList>
+                    <Tab>{description}</Tab>
+                    <Tab>{itinerary}</Tab>
+                    <Tab>{include}</Tab>
+                    <Tab>{price}</Tab>
+                </TabList>
+                
+                    <TabPanel>
+                        <DescriptionContainer>
+                            <div>
+                                <p>
+                                    {postTour.acf.description}
+                                </p>
 
 
-                    <h3>Lo mas destacado</h3>
-                    
-                    <ul>
-                        {
-                            summaryItems.map( itemList => { 
-                                return(
-                                    <li><FontAwesomeIconStyled icon={faDotCircle} /> {itemList}</li>
-                                )
-                            })
-                        }
-                    </ul>
-                </div>
+                                <h3>{destacado}</h3>
+                                
+                                <ul>
+                                    {
+                                        summaryItems.map( itemList => { 
+                                            return(
+                                                <li><FontAwesomeIconStyled icon={faDotCircle} /> {itemList}</li>
+                                            )
+                                        })
+                                    }
+                                </ul>
+                            </div>
 
-                <div>
-                    <h3>Itinerario</h3>
+                        </DescriptionContainer>
+           
+                    </TabPanel>
 
-                    <p><FontAwesomeIconStyled icon={faMapMarkerAlt} /> <span>Inicio: </span>{postTour.acf.start_time}</p>
+                    <TabPanel>
+                        <DescriptionContainer>
+                            <div>
+                                <h3>{itinerary}</h3>
 
-                    <p><FontAwesomeIconStyled icon={faMapMarkerAlt} /> <span>Final: </span>{postTour.acf.end_time}</p>
+                                <p><FontAwesomeIconStyled icon={faMapMarkerAlt} /> <span>{startTime}: </span>{postTour.acf.start_time}</p>
 
-                    <h4>{postTour.acf.day_one_title}</h4>
+                                <p><FontAwesomeIconStyled icon={faMapMarkerAlt} /> <span>{endTime}: </span>{postTour.acf.end_time}</p>
 
-                    <p>
-                        {postTour.acf.day_one_description}
-                    </p>
+                                <h4>{postTour.acf.day_one_title}</h4>
+                            
+                                {postTour.acf.day_one_description.split("%").map( itemDescription => <p>{itemDescription}</p>)}
+                                
+                                <h4>{postTour.acf.day_two_title}</h4>
 
-                    <h4>{postTour.acf.day_two_title}</h4>
+                                {postTour.acf.day_two_description.split("%").map( itemDescription => <p>{itemDescription}</p>)}
 
-                    <p>
-                        {postTour.acf.day_two_description}
-                    </p>
-                </div>
+                                <h4>{postTour.acf.day_three_title}</h4>
 
-                <div>
-                    <h4>Incluye</h4>
+                                {postTour.acf.day_three_description.split("%").map( itemDescription => <p>{itemDescription}</p>)}
 
-                    <ul>
-                        {
-                            includeList.map( includeElem => {
-                                return(
-                                    <li><FontAwesomeIconCheck icon={faCheck} />{includeElem}</li>
-                                )
-                            })
-                        }
-                    </ul>
-            
-                    <h4>No Incluye</h4>
+                                <h4>{postTour.acf.day_four_title}</h4>
 
-                    <ul>
-                        {
-                            nonIncludeList.map( notIncludeElem => {
-                                return(
-                                    <li><FontAwesomeIconTimes icon={faTimes} />{notIncludeElem}</li>
-                                )
-                            })
-                        }
-                    </ul>
-                </div>
+                                {postTour.acf.day_four_description.split("%").map( itemDescription => <p>{itemDescription}</p>)}
+                            </div>
+                        </DescriptionContainer>
+                    </TabPanel>
+                           
+                    <TabPanel>
+                        <DescriptionContainer>
+                            <div>
+                                <h4>{include}</h4>
 
-                <div>
-                    <h3>Precio</h3>
-                    <p>{postTour.acf.price_details}</p>
-                </div>
-            </DescriptionContainer>
+                                <ul>
+                                    {
+                                        includeList.map( includeElem => {
+                                            return(
+                                                <li><FontAwesomeIconCheck icon={faCheck} />{includeElem}</li>
+                                            )
+                                        })
+                                    }
+                                </ul>
+                        
+                                <h4>{notInclude}</h4>
 
-            <FormTour />
-            
+                                <ul>
+                                    {
+                                        nonIncludeList.map( notIncludeElem => {
+                                            return(
+                                                <li><FontAwesomeIconTimes icon={faTimes} />{notIncludeElem}</li>
+                                            )
+                                        })
+                                    }
+                                </ul>
+                            </div>
+                        </DescriptionContainer>
+                    </TabPanel>
+                    <TabPanel>
+                        <DescriptionContainer>
+                            <div>
+                                <h3>{price}</h3>
+                                <ul>
+                                    {
+                                        priceDetails.map( elem => {
+                                            return(
+                                                <li><FontAwesomeIconStyled icon={faDotCircle} /> {elem}</li>
+                                            )
+                                        })
+                                    }
+                                </ul>
+                            </div>
+                        </DescriptionContainer>
+                    </TabPanel>
+              
+            </Tabs>
+
+            <LinkButtonHomeSecond href="/contact-tour">{bookTour}</LinkButtonHomeSecond>
         </DetailsContainer>
-
     )
 }
 
 export default connect(TourDetails);
 
 const DetailsContainer = styled.div`
-    margin: 12rem 4rem 4rem 4rem;
+
+    margin: 8rem 0.5rem 4rem 0.5rem;
+    /* margin: 12rem 4rem 4rem 4rem;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
+    align-items: flex-start;
 
     @media(max-width: 768px) {
+        max-width: 100%;
         flex-direction: column;
         margin: 5rem 1rem 2rem 1rem;
+        align-items: center;
+        justify-content: center;
+    } */
+
+    @media(min-width: 768px) {
+        margin: 12rem 1rem 4rem 1rem;
     }
 `;
 
 const DescriptionContainer = styled.div`
     
     div{
-        margin: 3rem 0;
+        margin: 3rem 1rem 3rem 1rem;
+
+        @media(max-width: 768px) {
+            margin: 1rem .5rem 1rem .5rem;
+        }
     }
 
     h2 {
@@ -169,3 +227,35 @@ const FontAwesomeIconStyled = styled(FontAwesomeIcon)`
     color: #FBBF22;
     margin-right: .5rem;
 `;
+
+export const ButtonContainer = styled.div`
+    display: flex;
+    margin-left: 1rem;
+
+    @media (max-width: 768px){
+        flex-direction: column;
+    }
+`
+export const ButtonStyles = styled.button`
+    font-size: 1.3rem;
+    display: inline-block;
+    padding: .8rem 1.2rem;
+    margin: 0 1rem 0 0;
+    list-style: none;
+    cursor: pointer;
+    color: #fff;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+    background-color: rgb(236, 139, 34);
+    border-color: rgb(255, 255, 255);
+    border:none;
+
+    @media (max-width: 768px){
+        margin-bottom: .5rem;
+    }
+`
+
+
+
+
+

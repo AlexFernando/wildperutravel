@@ -6,24 +6,29 @@ import Loading from './Loading';
 const FormTours = ({state, actions, libraries}) => {
 
     useEffect( () => {
-        actions.source.fetch("/contact-tour")
+        if(state.theme.lang === "en") {
+            actions.source.fetch("/contact-tour")
+        }
+   
+        else {
+            actions.source.fetch("/es/contact-tour")
+        }
     }, [])
 
     const Html2react = libraries.html2react.Component;
 
-    const contentForm =  state.source.page["104"];
+    const contentForm = state.source.page["104"];
 
     return ( 
-
         <>
-        {typeof contentForm === "undefined" ? <Loading /> 
-            :
+            {typeof contentForm === "undefined" ? <Loading /> 
+                :
                 <Content>
-                    <h2>Book your dream</h2>
-                    <h3>Please, fill out the form. We'll back to you as soon as possible</h3>
+                    <h2>{contentForm.acf.book_title}</h2>
+                    <h3>{contentForm.acf.book_paragraph}</h3>
                     <Html2react html={contentForm.content.rendered} />
                 </Content>
-        }
+            }
         </>
     );
 }

@@ -12,14 +12,9 @@ import { faClock } from '@fortawesome/free-solid-svg-icons'
 import Loading from './Loading';
 import {ourTours, viewMore} from '../Root';
 
-
 import {BackgroundColor} from './AllTours'
 
-const MachuPicchu = ({state, actions}) => {
-
-   /*  useEffect( () => {
-        actions.source.fetch("/alltours")
-    }, []) */
+const AdventuresTours = ({state, actions}) => {
 
     useEffect( () => {
 
@@ -41,31 +36,23 @@ const MachuPicchu = ({state, actions}) => {
 
             const singleTour = state.source.alltours[id];
 
-            if(singleTour.tags.length>0 && singleTour.tags[0] === 4 || singleTour.tags[1] === 4) {
+            if(singleTour.tags.length>0 && singleTour.tags[0] === 7 || singleTour.tags[1] === 7) {
                 tours.push(singleTour);
             }
         })
     }
 
-    const pageMachu = state.source.page[40];
+    const pageMachu = state.source.page[285];
+
 
     return ( 
-        <>           
+
+        <>
         {typeof pageMachu === "undefined" ? <Loading /> : 
         <MachuPicchuContainer>
             <BackgroundColor background = {pageMachu.acf.image_header.sizes.large}>          
                 <h3>{pageMachu.acf.title}</h3>
             </BackgroundColor>
-
-          {/*   <SummaryText>
-                <h2>
-                    {pageMachu.acf.title}
-                </h2>
-                <p>
-                    {pageMachu.acf.paragraph}
-                </p>
-                    
-            </SummaryText> */}
 
             <ToursContainer>
                 
@@ -83,8 +70,6 @@ const MachuPicchu = ({state, actions}) => {
                                     
                                     <TourItem>
                                         <Link href={tour.link}>
-                                            
-                                            
                                             <ImageTourStyled src={tour.acf.image_tour.sizes.medium} />
                                             
                                             <InfoTour>
@@ -96,7 +81,6 @@ const MachuPicchu = ({state, actions}) => {
                                                     <p><FontAwesomeCardTour icon={faClock} />{tour.acf.full_days}</p>
                                                     <span>US$&nbsp;{tour.acf.price}</span>
                                                 </div>
-
 
                                                 <ViewMoreWrapper>
                                                     <LinkButtonHomeSecond href={tour.link}>{viewMore}</LinkButtonHomeSecond>    
@@ -120,7 +104,7 @@ const MachuPicchu = ({state, actions}) => {
      );
 }
 
-export default connect(MachuPicchu);
+export default connect(AdventuresTours);
 
 const MachuPicchuContainer = styled.div`
     margin-top: 3rem;
@@ -157,3 +141,63 @@ export const ImageHeader = styled(Image)`
     }
 `
 
+// export const BackgroundColor = styled.div`
+//     background-image: linear-gradient(to top right, rgb(136, 176, 75,0), rgba(136, 176, 75,1));
+//     background-repeat: no-repeat;
+//     background-size: cover;
+//     background-position:center center;
+//     height: 700px;
+//     display: flex;
+//     justify-content: center;
+//     align-content: center;
+//     overflow-wrap: break-word;
+//     padding: 1rem 2rem;
+   
+//     @media(max-width: 768px) {
+//         height: 673px;
+//         padding: 1.5rem;
+//         flex-direction: column;
+//     }
+// `;
+
+// export const MainContainer = styled.div`
+//     display: flex;
+//     flex-direction: column;
+//     flex-basis: 60%;
+//     justify-content: center;
+
+//     @media(max-width: 768px) {
+//         flex-basis: 100%;
+//     }
+
+//         h1 {
+//             text-transform: capitalize;
+//             font-size: 2rem;
+//             letter-spacing: 4px;
+//             margin-top: 5rem;
+//             color: #454545;
+
+//             @media(min-width: 768px) {
+//                 font-size: 4rem;
+//             }
+//         }
+
+//         p {
+//             margin-top: 0;
+//             margin-bottom: 2rem;
+//             line-height: 1.8;
+//             font-family: 'Montserrat', sans-serif;
+//             width: 70%;
+//             font-size: 1rem;
+//             color: #454545;
+
+//             @media(max-width: 768px) {
+//                 width: 100%;
+//             }
+
+//             @media(min-width: 768px) {
+//                 font-size: 1.3rem;
+//                 margin-bottom: 2rem;
+//             }
+//         }
+// `

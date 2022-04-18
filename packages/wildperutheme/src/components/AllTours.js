@@ -1,8 +1,9 @@
 import React, {useEffect} from 'react';
 import { connect, styled, css } from "frontity";
 import Link from './Link'
-import {ToursContainer, ToursWrap, TourItem, ImageTourStyled, FontAwesomeCardTour} from './Home'
-import {ImageHeader, SummaryText} from './MachuPicchu'
+import {ToursContainer, ToursWrap, TourItem, InfoTour, ViewMoreWrapper, ImageTourStyled, FontAwesomeCardTour} from './Home'
+// import {ImageHeader, BackgroundColor, MainContainer} from './MachuPicchu'
+import LinkButtonHomeSecond from './LinkButtonHomeSecond';
 
 //icons
 import { faClock } from '@fortawesome/free-solid-svg-icons'
@@ -10,13 +11,24 @@ import { faClock } from '@fortawesome/free-solid-svg-icons'
 
 import Loading from './Loading';
 
+import {ourTours} from '../Root';
+
 const FullTours = ({state, actions}) => {
 
-    /* useEffect( () => {
-        actions.source.fetch("/alltours")
-    }, []) */
+    useEffect( () => {
 
-    const data = state.source.get('/alltours')
+        if(state.theme.lang === "en") {
+            actions.source.fetch("/alltours")
+        }
+
+        else {
+            actions.source.fetch("/es/alltours")
+        }
+    }, [])
+
+    //const data = state.source.get('/alltours')
+
+    const data = state.theme.lang === "en" ? state.source.get('/alltours') : state.source.get('/es/alltours')
 
     let tours = [];
 
@@ -35,21 +47,28 @@ const FullTours = ({state, actions}) => {
         <>           
         {typeof pageAllTours === "undefined" ? <Loading /> : 
         <>
-            <ImageHeader src={pageAllTours.acf.image_header.sizes.large}/>
-            <SummaryText>
-                <h2>
-                    {pageAllTours.acf.title}
-                </h2>
-                <hr></hr>
-                <p>
-                    {pageAllTours.acf.paragraph}
-                </p>
+            <BackgroundColor background = {pageAllTours.acf.image_header.sizes.large}>          
+             
+                    <h3>{pageAllTours.acf.title}</h3>         
+            
+            </BackgroundColor>  
+            {/* <BackgroundColor>          
+                <MainContainer>
+
+                    <h1>{pageAllTours.acf.title}</h1>
+                    <p>
+                        {pageAllTours.acf.paragraph}
+                    </p>
                     
-            </SummaryText>
+                </MainContainer>
+            
+                <ImageHeader src={pageAllTours.acf.image_header.sizes.medium}/>
+            </BackgroundColor> */}
+
 
             <ToursContainer>
                 
-                <h2>OUR TOURS</h2>
+                <h2>{ourTours}</h2>
                 <hr></hr>
 
                 {
@@ -66,14 +85,20 @@ const FullTours = ({state, actions}) => {
                                             
                                             <ImageTourStyled src={tour.acf.image_tour.sizes.medium} />
                                             
-                                            <h3>{tour.acf.title}</h3>
+                                            <InfoTour>
+                                                <h3>{tour.acf.title}</h3>
 
-                                            <p>{tour.acf.description}</p>
-                                            
-                                            <div>
-                                                <p><FontAwesomeCardTour icon={faClock} />{tour.acf.full_days}</p>
-                                                <span>US$&nbsp;{tour.acf.price}</span>
-                                            </div>
+                                                <p>{tour.acf.description}</p>
+                                                
+                                                <div>
+                                                    <p><FontAwesomeCardTour icon={faClock} />{tour.acf.full_days}</p>
+                                                    <span>{tour.acf.price}</span>
+                                                </div>
+
+                                                <ViewMoreWrapper>
+                                                    <LinkButtonHomeSecond href={tour.link}>{ourTours}</LinkButtonHomeSecond>    
+                                                </ViewMoreWrapper>    
+                                            </InfoTour>
                                         </Link>
                                             
                                     </TourItem>
@@ -95,5 +120,39 @@ const FullTours = ({state, actions}) => {
         </>
      );
 }
+
+
+export const BackgroundColor = styled.div`
+    background-image: url(${props => props.background});
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position:center center;
+    display: flex;
+    justify-content: flex-start;
+    align-content: center;
+    height: 350px;
+    align-items: center;
+    padding-left: 10rem;
+    margin-top: 5%;
+   
+    @media(max-width: 768px) {
+        height: 300px;
+        flex-direction: column;
+    }
+
+    h3 {
+            text-transform: capitalize;
+            font-size: 1rem;
+            margin-bottom: 0;
+            color: #fff;
+            text-align: center;
+            text-shadow: 1px 1px 2px black;
+
+            @media(min-width: 768px) {
+                font-size: 2.5rem;
+            }
+        }
+`;
+
 
 export default connect(FullTours);

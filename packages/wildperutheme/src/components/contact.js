@@ -1,12 +1,15 @@
-import React from 'react';
-import {styled } from "frontity";
-import {faMapMarkerAlt, faStreetView} from '@fortawesome/free-solid-svg-icons';
+import React, {useEffect} from 'react';
+import {styled, connect } from "frontity";
+import {faMapMarkerAlt, faStreetView, faEnvelope} from '@fortawesome/free-solid-svg-icons';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInstagram, faYoutube, faFacebookSquare, faTripadvisor} from '@fortawesome/free-brands-svg-icons';
-import LinkButton from './LinkButtonHomeSecond';
+import { faInstagram, faYoutube, faFacebookSquare} from '@fortawesome/free-brands-svg-icons';
+import Form from './form';
 
-import Form from './form'
+import Loading from './Loading';
+
+import { FaTripadvisor, FaInstagram, FaYoutube, FaFacebook } from 'react-icons/fa';
+import { IconContext } from "react-icons";
 
 const ContactContainer = styled.div`
     display: flex;
@@ -24,9 +27,8 @@ const ContactElement = styled.div`
 
     display: flex;
     flex-direction: column;
-    margin-top: 2rem;
+    margin: 1.5rem;
     flex-basis: 50%;
-    flex-wrap: wrap;
 
     @media(max-width: 768px) {
         flex-basis: 100%;
@@ -43,17 +45,17 @@ const ContactElement = styled.div`
             display: flex;
             justify-content: center;
             align-content: center;
+        }
 
-            li {
-                margin: 0 1.5rem 2rem 1.5rem;
+        li {
+                margin: 1rem 1rem 1rem 1rem;
 
                 a {
                     color : #fff;
-                    font-size: 2rem;
+                    font-size: 1rem;
                 }
 
             }
-        }
     }
 
     h2 {
@@ -78,89 +80,102 @@ const ContactElement = styled.div`
         font-weight: 200;
         margin-bottom: 1rem;
         letter-spacing: 1px;
+        font-size: 1.2rem;
 
         @media(max-width: 768px) {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: #fff;
         }
 
     }
 `;
 
-const ContactForm = styled.div`
-    
-    @media(max-width: 768px) {
-        padding: 1rem;
-    }
-    
-    h3 {
-        font-size: 2rem;
-        font-weight: 300;
-    }
-    form {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        margin-bottom: 2rem;
-
-        div {
-            display: flex;
-            flex-direction: column;
-        }
-
-        label {
-            letter-spacing: 1px;
-            font-size: 1.2rem;
-        }
-
-        input {
-            height: 30px;
-        }
-
-        input, textarea {
-            margin:1rem 1rem 2rem 1rem;
-            border: none;
-            border-radius: 5px;
-        }
-    }
-`;
 
 const FontAwesomeIconStyled = styled(FontAwesomeIcon)`
     margin-right: 1rem;
-    font-size: 3rem;
+    font-size: 2.5rem;
 
     @media(max-width: 768px) {
-        font-size : 2rem;
-        margin-right: 0;
+        font-size : 1.8rem;
+        margin-right: .5rem;
     }
 `;
 
 
-const Contact = () => {
+const Contact = ({state, actions, libraries}) => {
+
+    useEffect( () => {
+        if(state.theme.lang === "en") {
+            actions.source.fetch("/footer-info")
+        }
+
+        else {
+            actions.source.fetch("/es/footer-info")
+        }
+
+    }, [])
+
+    const pageFooterInfo = state.source.page[230];
 
     return ( 
+
+        <>
+        {typeof pageFooterInfo === "undefined" ? <Loading /> 
+            :
         <ContactContainer>
             <ContactElement>
-                <h2>Let's Get In Touch!</h2>
-                <h3>Ready to start your new adventure with us? Fill out the form or visit our social networks and get in contact</h3>
+                <h2>{pageFooterInfo.acf.title}</h2>
+                <h3>{pageFooterInfo.acf.subtitle}</h3>
             
                 <ul>
-                        <li><a href="https://www.facebook.com/wildperutravel/" alt="Share on Facebook" aria-label="Link to Facebook" target="_blank" rel="noreferrer"><FontAwesomeIconStyled icon={faFacebookSquare}/></a></li>
-                        <li><a href="https://www.tripadvisor.com.pe/Attraction_Review-g294314-d14803688-Reviews-Wild_Peru_Travel-Cusco_Cusco_Region.html" alt="Share on TripAdvisor" aria-label="Link to TripAdvisor" target="_blank" rel="noreferrer"><FontAwesomeIconStyled icon={faTripadvisor}/></a></li>
-                        <li><a href="https://www.facebook.com/wildperutravel/" alt="Share on Instagram" aria-label="Link to Instagram" target="_blank" rel="noreferrer"><FontAwesomeIconStyled icon={faInstagram}/></a></li>
-                        <li><a href="https://www.facebook.com/wildperutravel/" alt="Share on Youtube" aria-label="Link to Youtube" target="_blank" rel="noreferrer"><FontAwesomeIconStyled icon={faYoutube}/></a></li>
+                    <li>
+                        <a href="https://www.facebook.com/wildperutravel/" alt="Share on Facebook" aria-label="Link to Facebook" target="_blank" rel="noreferrer">
+                            <IconContext.Provider value={{ color: "white", className: "global-class-name", size: "2.5rem" } }>
+                                <FaFacebook />
+                            </IconContext.Provider> 
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.tripadvisor.com.pe/Attraction_Review-g294314-d14803688-Reviews-Wild_Peru_Travel-Cusco_Cusco_Region.html" alt="Share on TripAdvisor" aria-label="Link to TripAdvisor" target="_blank" rel="noreferrer">
+                            <IconContext.Provider value={{ color: "white", className: "global-class-name", size: "2.5rem" } }>
+                                <FaTripadvisor />
+                            </IconContext.Provider> 
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.facebook.com/wildperutravel/" alt="Share on Instagram" aria-label="Link to Instagram" target="_blank" rel="noreferrer">
+                            <IconContext.Provider value={{ color: "white", className: "global-class-name", size: "2.5rem" } }>
+                                <FaInstagram />
+                            </IconContext.Provider>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.facebook.com/wildperutravel/" alt="Share on Youtube" aria-label="Link to Youtube" target="_blank" rel="noreferrer">
+                            <IconContext.Provider value={{ color: "white", className: "global-class-name", size: "2.5rem" } }>
+                                <FaYoutube />
+                            </IconContext.Provider>
+                        </a>
+                    </li>
                 </ul>
 
                 <ul>
-                    <li><FontAwesomeIconStyled icon={faMapMarkerAlt}/>Wild Peru Travel</li>
+                    <li><a href="mailto:wildperutravel@gmail.com"><FontAwesomeIconStyled icon={faEnvelope}/></a>{pageFooterInfo.acf.gmail}</li>
+                    
+                    <li><FontAwesomeIconStyled icon={faMapMarkerAlt}/>{pageFooterInfo.acf.organization_name}</li>
                    
-                    <li><FontAwesomeIconStyled icon={faStreetView}/>Calle Marquez Nº 256, Cusco, Peru.</li>
+                    <li><FontAwesomeIconStyled icon={faStreetView}/>{pageFooterInfo.acf.street_office}</li>
                 </ul>
             </ContactElement>
 
             <Form />
         </ContactContainer>
-
+      }
+      </>
     );
 }
  
-export default Contact;
+export default connect(Contact);
