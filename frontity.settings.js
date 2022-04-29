@@ -67,7 +67,7 @@ const settings = [
   {
     
     "name": "wildperutravel-spanish",
-    "match": [".*localhost:3000\/es(\/.*)?$"],
+    "match": [".*wildperutravels.com\/es(\/.*)?$"],
     "state": {
       "frontity": {
         "url": "https://restapi.wildfreewalkingtours.com/es/",

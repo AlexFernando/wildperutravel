@@ -8,7 +8,7 @@ import Form from './form';
 
 import Loading from './Loading';
 
-import { FaTripadvisor, FaInstagram, FaYoutube, FaFacebook } from 'react-icons/fa';
+import { FaTripadvisor, FaInstagram, FaYoutube, FaFacebook, FaMobileAlt,FaWhatsapp } from 'react-icons/fa';
 import { IconContext } from "react-icons";
 
 const ContactContainer = styled.div`
@@ -160,14 +160,31 @@ const Contact = ({state, actions, libraries}) => {
                             </IconContext.Provider>
                         </a>
                     </li>
+
                 </ul>
 
                 <ul>
+                    <li>
+                        
+                        <IconContext.Provider value={{ color: "white", className: "global-class-name", size: "2.5rem" } }>
+                            <FaMobileAlt />
+                        </IconContext.Provider>{pageFooterInfo.acf.mobile}
+        
+                    </li>
+
+                    <li>
+                            <IconContext.Provider value={{ color: "white", className: "global-class-name", size: "2.5rem" } }>
+                                <FaWhatsapp />
+                            </IconContext.Provider>{pageFooterInfo.acf.whatsapp_info}
+                        
+                    </li>
                     <li><a href="mailto:wildperutravel@gmail.com"><FontAwesomeIconStyled icon={faEnvelope}/></a>{pageFooterInfo.acf.gmail}</li>
                     
                     <li><FontAwesomeIconStyled icon={faMapMarkerAlt}/>{pageFooterInfo.acf.organization_name}</li>
                    
                     <li><FontAwesomeIconStyled icon={faStreetView}/>{pageFooterInfo.acf.street_office}</li>
+
+                   
                 </ul>
             </ContactElement>
 

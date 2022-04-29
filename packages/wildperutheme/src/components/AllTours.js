@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react';
-import { connect, styled, css } from "frontity";
+import React, {useState, useEffect} from 'react';
+import {Global, connect, styled, css } from "frontity";
 import Link from './Link'
 import {ToursContainer, ToursWrap, TourItem, InfoTour, ViewMoreWrapper, ImageTourStyled, FontAwesomeCardTour} from './Home'
 // import {ImageHeader, BackgroundColor, MainContainer} from './MachuPicchu'
@@ -13,7 +13,18 @@ import Loading from './Loading';
 
 import {ourTours} from '../Root';
 
+// filter tags
+import useFilterTags from './UseFilterTags';
+
+//animations scroll
+import { AnimationOnScroll } from 'react-animation-on-scroll';
+import ScrollAnimations from "animate.css/animate.min.css";
+
 const FullTours = ({state, actions}) => {
+
+    const {allCategory, FilterSubcategoriesUI} = useFilterTags("");
+
+    const [filterByTag, setFilterByTag] = useState([]);
 
     useEffect( () => {
 
@@ -25,8 +36,6 @@ const FullTours = ({state, actions}) => {
             actions.source.fetch("/es/alltours")
         }
     }, [])
-
-    //const data = state.source.get('/alltours')
 
     const data = state.theme.lang === "en" ? state.source.get('/alltours') : state.source.get('/es/alltours')
 
@@ -43,43 +52,54 @@ const FullTours = ({state, actions}) => {
 
     const pageAllTours = state.source.page[47];
 
+    useEffect( () => {
+
+        if(allCategory === 2) {
+            setFilterByTag([]);
+        }
+      
+        else if(allCategory !== "") {
+            const filter = tours.filter(elem => (parseInt(elem.tags[1]) || parseInt(elem.tags[0])) === parseInt(allCategory))
+            setFilterByTag(filter);
+        } 
+    }, [allCategory])
+
+ 
+
     return ( 
         <>           
         {typeof pageAllTours === "undefined" ? <Loading /> : 
         <>
-            <BackgroundColor background = {pageAllTours.acf.image_header.sizes.large}>          
-             
-                    <h3>{pageAllTours.acf.title}</h3>         
-            
-            </BackgroundColor>  
-            {/* <BackgroundColor>          
-                <MainContainer>
+            <Global styles = {ScrollAnimations} />
 
-                    <h1>{pageAllTours.acf.title}</h1>
-                    <p>
-                        {pageAllTours.acf.paragraph}
-                    </p>
-                    
-                </MainContainer>
-            
-                <ImageHeader src={pageAllTours.acf.image_header.sizes.medium}/>
-            </BackgroundColor> */}
+            <BackgroundColor background = {pageAllTours.acf.image_header.sizes.large}>          
+                <AnimationOnScroll animateIn="animate__fadeIn" delay={100} duration={1.5}>
+                    <h3>{pageAllTours.acf.title}</h3>
+                </AnimationOnScroll>        
+            </BackgroundColor>  
 
 
             <ToursContainer>
-                
-                <h2>{ourTours}</h2>
+                <AnimationOnScroll animateIn="animate__fadeIn" delay={100} duration={1.5}>
+                    <h2>{ourTours}</h2>
+                </AnimationOnScroll>
                 <hr></hr>
 
-                {
+                <TagSet>
+                    <AnimationOnScroll animateIn="animate__fadeIn" delay={100} duration={1.5}>
+                        {FilterSubcategoriesUI()}
+                    </AnimationOnScroll>
+                </TagSet>
 
-                    data.isReady && tours.length > 0 ? 
+
+                {
+                    data.isReady && tours.length > 0 && filterByTag.length === 0? 
 
                     <ToursWrap>
                         {
                             tours.reverse().map( tour => {
                                 return (
-                                    
+                                    <AnimationOnScroll animateIn="animate__fadeIn" delay={100} duration={1.5}>
                                     <TourItem>
                                         <Link href={tour.link}>
                                             
@@ -102,7 +122,7 @@ const FullTours = ({state, actions}) => {
                                         </Link>
                                             
                                     </TourItem>
-                                    
+                                    </AnimationOnScroll>
                                 )
                             })
                         }
@@ -111,6 +131,42 @@ const FullTours = ({state, actions}) => {
                     :null
                 }
 
+                {
+                    data.isReady && filterByTag.length > 0 ? 
+                        <ToursWrap>
+                            {
+                                filterByTag.reverse().map( tour => {
+                                    return (
+                                        
+                                        <TourItem>
+                                            <Link href={tour.link}>
+                                                
+                                                <ImageTourStyled src={tour.acf.image_tour.sizes.medium} />
+                                                
+                                                <InfoTour>
+                                                    <h3>{tour.acf.title}</h3>
+
+                                                    <p>{tour.acf.description}</p>
+                                                    
+                                                    <div>
+                                                        <p><FontAwesomeCardTour icon={faClock} />{tour.acf.full_days}</p>
+                                                        <span>{tour.acf.price}</span>
+                                                    </div>
+
+                                                    <ViewMoreWrapper>
+                                                        <LinkButtonHomeSecond href={tour.link}>{ourTours}</LinkButtonHomeSecond>    
+                                                    </ViewMoreWrapper>    
+                                                </InfoTour>
+                                            </Link>
+                                                
+                                        </TourItem>
+                                        
+                                    )
+                                })
+                            }
+                        </ToursWrap>
+                    :null
+                }
             </ToursContainer>
 
 
@@ -141,18 +197,28 @@ export const BackgroundColor = styled.div`
     }
 
     h3 {
-            text-transform: capitalize;
-            font-size: 1rem;
-            margin-bottom: 0;
-            color: #fff;
-            text-align: center;
-            text-shadow: 1px 1px 2px black;
+        text-transform: capitalize;
+        font-size: 2rem;
+        margin-bottom: 0;
+        color: #fff;
+        text-align: center;
+        text-shadow: 1px 1px 2px black;
 
-            @media(min-width: 768px) {
-                font-size: 2.5rem;
-            }
+        @media(min-width: 768px) {
+            font-size: 2.5rem;
         }
+    }
 `;
 
+const TagSet = styled.div`
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-top: 5rem;
 
+
+    @media(max-width: 768px) {
+        flex-wrap: wrap;
+    }
+`
 export default connect(FullTours);

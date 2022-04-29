@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import { connect, styled, css } from "frontity";
+import {Global, connect, styled, css } from "frontity";
 import Link from './Link';
 import Image from "@frontity/components/image";
 
@@ -12,7 +12,11 @@ import { faClock } from '@fortawesome/free-solid-svg-icons'
 import Loading from './Loading';
 import {ourTours, viewMore} from '../Root';
 
-import {BackgroundColor} from './AllTours'
+import {BackgroundColor} from './AllTours';
+
+//animations scroll
+import { AnimationOnScroll } from 'react-animation-on-scroll';
+import ScrollAnimations from "animate.css/animate.min.css";
 
 const SacredValley = ({state, actions}) => {
 
@@ -53,13 +57,20 @@ const SacredValley = ({state, actions}) => {
         <>
         {typeof pageMachu === "undefined" ? <Loading /> : 
         <MachuPicchuContainer>
+
+            <Global styles = {ScrollAnimations} />
+            
             <BackgroundColor background = {pageMachu.acf.image_header.sizes.large}>          
-                <h3>{pageMachu.acf.title}</h3>
+                <AnimationOnScroll animateIn="animate__fadeIn" delay={100} duration={1.5}>
+                    <h3>{pageMachu.acf.title}</h3>
+                </AnimationOnScroll>
             </BackgroundColor>
+           
 
             <ToursContainer>
-                
-                <h2>{ourTours}</h2>
+                <AnimationOnScroll animateIn="animate__fadeIn" delay={100} duration={1.5}>
+                    <h2>{ourTours}</h2>
+                </AnimationOnScroll>
                 <hr></hr>
 
                 {
@@ -70,28 +81,28 @@ const SacredValley = ({state, actions}) => {
                         {
                             tours.reverse().map( tour => {
                                 return (
-                                    
-                                    <TourItem>
-                                        <Link href={tour.link}>
-                                            <ImageTourStyled src={tour.acf.image_tour.sizes.medium} />
-                                            
-                                            <InfoTour>
-                                                <h3>{tour.acf.title}</h3>
-
-                                                <p>{tour.acf.description}</p>
+                                    <AnimationOnScroll animateIn="animate__fadeIn" delay={100} duration={1.5}>
+                                        <TourItem>
+                                            <Link href={tour.link}>
+                                                <ImageTourStyled src={tour.acf.image_tour.sizes.medium} />
                                                 
-                                                <div>
-                                                    <p><FontAwesomeCardTour icon={faClock} />{tour.acf.full_days}</p>
-                                                    <span>US$&nbsp;{tour.acf.price}</span>
-                                                </div>
+                                                <InfoTour>
+                                                    <h3>{tour.acf.title}</h3>
 
-                                                <ViewMoreWrapper>
-                                                    <LinkButtonHomeSecond href={tour.link}>{viewMore}</LinkButtonHomeSecond>    
-                                                </ViewMoreWrapper> 
-                                            </InfoTour>
-                                        </Link>
-                                    </TourItem>
-                                  
+                                                    <p>{tour.acf.description}</p>
+                                                    
+                                                    <div>
+                                                        <p><FontAwesomeCardTour icon={faClock} />{tour.acf.full_days}</p>
+                                                        <span>US$&nbsp;{tour.acf.price}</span>
+                                                    </div>
+
+                                                    <ViewMoreWrapper>
+                                                        <LinkButtonHomeSecond href={tour.link}>{viewMore}</LinkButtonHomeSecond>    
+                                                    </ViewMoreWrapper> 
+                                                </InfoTour>
+                                            </Link>
+                                        </TourItem>
+                                    </AnimationOnScroll>
                                 )
                             })
                         }

@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import { connect, styled, css } from "frontity";
+import {Global, connect, styled, css } from "frontity";
 import Link from './Link';
 import Image from "@frontity/components/image";
 
@@ -13,6 +13,11 @@ import Loading from './Loading';
 import {ourTours, viewMore} from '../Root';
 
 import {BackgroundColor} from './AllTours'
+
+//animations scroll
+import { AnimationOnScroll } from 'react-animation-on-scroll';
+import ScrollAnimations from "animate.css/animate.min.css";
+
 
 const AdventuresTours = ({state, actions}) => {
 
@@ -50,13 +55,19 @@ const AdventuresTours = ({state, actions}) => {
         <>
         {typeof pageMachu === "undefined" ? <Loading /> : 
         <MachuPicchuContainer>
-            <BackgroundColor background = {pageMachu.acf.image_header.sizes.large}>          
-                <h3>{pageMachu.acf.title}</h3>
+
+            <Global styles = {ScrollAnimations} />
+
+            <BackgroundColor background = {pageMachu.acf.image_header.sizes.large}>    
+                <AnimationOnScroll animateIn="animate__fadeIn" delay={100} duration={1.5}>  
+                    <h3>{pageMachu.acf.title}</h3>
+                </AnimationOnScroll>    
             </BackgroundColor>
 
             <ToursContainer>
-                
-                <h2>{ourTours}</h2>
+                <AnimationOnScroll animateIn="animate__fadeIn" delay={100} duration={1.5}>  
+                    <h2>{ourTours}</h2>
+                </AnimationOnScroll> 
                 <hr></hr>
 
                 {
@@ -67,7 +78,7 @@ const AdventuresTours = ({state, actions}) => {
                         {
                             tours.reverse().map( tour => {
                                 return (
-                                    
+                                    <AnimationOnScroll animateIn="animate__fadeIn" delay={100} duration={1.5}>  
                                     <TourItem>
                                         <Link href={tour.link}>
                                             <ImageTourStyled src={tour.acf.image_tour.sizes.medium} />
@@ -88,7 +99,7 @@ const AdventuresTours = ({state, actions}) => {
                                             </InfoTour>
                                         </Link>
                                     </TourItem>
-                                  
+                                    </AnimationOnScroll> 
                                 )
                             })
                         }
