@@ -52,23 +52,7 @@ const HomePage = ({state, actions}) => {
     return ( 
         <>           
         {typeof pageHome === "undefined" ? <Loading /> : 
-        <>
-            {/* <BackgroundColor background = {pageHome.acf.img_background.sizes.large}>          
-                <MainContainer>
-
-                    <h1>{pageHome.acf.main_title}</h1>
-                    <hr></hr>
-                    <p>
-                        {pageHome.acf.slogan}
-                    </p>
-                    <div>
-                        <LinkButtonHomeSecond href="/fulltours">{bookAdventure}</LinkButtonHomeSecond>
-                    </div>
-                    
-                </MainContainer>
-            </BackgroundColor>   */}
-
-            
+        <>            
             <CarouselBackground />
 
             <AboutContainer>
@@ -87,8 +71,10 @@ const HomePage = ({state, actions}) => {
             </AboutContainer>
 
             <ToursContainer>
-                <h2>{pageHome.acf.title_third_section}</h2>
-             
+
+            
+                    <h2>{pageHome.acf.title_third_section}</h2>
+              
                 <IconsContainer>
 
                     {
