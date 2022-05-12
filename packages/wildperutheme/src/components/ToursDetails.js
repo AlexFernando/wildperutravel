@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { connect, styled, css, Global } from "frontity";
+import Image from "@frontity/components/image";
 import Link from './Link'
 
 //icons
@@ -45,6 +46,7 @@ const TourDetails = ({state, actions}) => {
                     <Tab>{itinerary}</Tab>
                     <Tab>{include}</Tab>
                     <Tab>{price}</Tab>
+                    <Tab>Gallery</Tab>
                 </TabList>
                 
                     <TabPanel>
@@ -145,7 +147,32 @@ const TourDetails = ({state, actions}) => {
                             </div>
                         </DescriptionContainer>
                     </TabPanel>
-              
+                    
+                    <TabPanel>
+                        <div>
+                         
+
+                            {
+                                postTour.acf.images_gallery ? 
+                                
+                                    <BorderGallery>
+                                        <GalleryContainer>
+                                            {Object.keys(postTour.acf.images_gallery).map(elem => {
+                                                return(
+                                                    <ImageGallleryStyles src= {postTour.acf.images_gallery[elem].sizes.medium} />
+                                                )
+                                            })
+                                            }
+                                        </GalleryContainer>
+                                    </BorderGallery>
+                                 : 
+                                
+                                <GalleryContainer>
+                                    <p>There's no images on this gallery</p>
+                                </GalleryContainer>
+                            }
+                        </div>   
+                    </TabPanel>
             </Tabs>
 
             <LinkButtonHomeSecond href="/contact-tour">{bookTour}</LinkButtonHomeSecond>
@@ -158,19 +185,6 @@ export default connect(TourDetails);
 const DetailsContainer = styled.div`
 
     margin: 8rem 0.5rem 4rem 0.5rem;
-    /* margin: 12rem 4rem 4rem 4rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
-
-    @media(max-width: 768px) {
-        max-width: 100%;
-        flex-direction: column;
-        margin: 5rem 1rem 2rem 1rem;
-        align-items: center;
-        justify-content: center;
-    } */
 
     @media(min-width: 768px) {
         margin: 12rem 1rem 4rem 1rem;
@@ -252,6 +266,27 @@ export const ButtonStyles = styled.button`
 
     @media (max-width: 768px){
         margin-bottom: .5rem;
+    }
+`
+
+const BorderGallery = styled.div`
+    border: 1px solid rgba(222, 222, 222, 0.49);
+    margin: 3rem auto;
+`
+
+const GalleryContainer = styled.div`
+    display: flex;
+    justify-content: space-evenly;
+    align-content: center;
+    margin: 3% auto;
+
+    @media (max-width: 768px){
+       flex-direction: column;
+    }
+`
+const ImageGallleryStyles = styled(Image)`
+    @media (max-width: 768px){
+       margin: 1rem auto;
     }
 `
 
