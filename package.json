@@ -33,8 +33,9 @@
     "react": "17.0.2",
     "react-animation-on-scroll": "^5.1.0",
     "react-icons": "^4.3.1",
-    "react-tabs": "^4.2.0",
-    "styled-components": "^4.4.1",
+    "react-reveal": "^1.2.2",
+    "react-tabs": "^4.2.1",
+    "styled-components": "^5.3.5",
     "wildperutheme": "file:packages/wildperutheme"
   }
 }
