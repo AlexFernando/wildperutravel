@@ -59,7 +59,6 @@ const HomePage = ({state, actions}) => {
         <>            
             <CarouselBackground />
 
-            <AboutContainer>
                 <h2>
                     {pageHome.acf.about_title}
                 </h2>
@@ -67,7 +66,7 @@ const HomePage = ({state, actions}) => {
                 <p>
                     {pageHome.acf.description_about}
                 </p>
-        <>         
+             
             <Global styles = {ScrollAnimations} />
 
             <CarouselBackground />
@@ -99,11 +98,8 @@ const HomePage = ({state, actions}) => {
             
             <ToursContainer>
 
-            
                     <h2>{pageHome.acf.title_third_section}</h2>
               
-                <IconsContainer>
-
                     <AnimationOnScroll animateIn="animate__fadeIn" delay={100} duration={1.5}>
                         <h2>{pageHome.acf.title_third_section}</h2>
                     </AnimationOnScroll>      
