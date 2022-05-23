@@ -73,6 +73,9 @@ const FullTours = ({state, actions}) => {
             <Global styles = {ScrollAnimations} />
 
             <BackgroundColor background = {pageAllTours.acf.image_header.sizes.large}>          
+
+                <h3>{pageAllTours.acf.title}</h3>         
+
                 <AnimationOnScroll animateIn="animate__fadeIn" delay={100} duration={1.5}>
                     <h3>{pageAllTours.acf.title}</h3>
                 </AnimationOnScroll>        
@@ -88,7 +91,7 @@ const FullTours = ({state, actions}) => {
                 <TagSet>
                     {FilterSubcategoriesUI()}
                 </TagSet>
-
+            
 
                 {
                     data.isReady && tours.length > 0 && filterByTag.length === 0? 
