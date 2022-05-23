@@ -16,8 +16,11 @@ const Header = ({ state }) => {
     <AllNavbar>
       <BrandContainer>
         <StyledLink link="/">
-          <ImageStyled src={'https://restapi.wildfreewalkingtours.com/wp-content/uploads/2022/04/logo.jpeg'} />
+
+          <ImageStyled src={'https://restapi.wildfreewalkingtours.com/wp-content/uploads/2022/04/WhatsApp-Image-2022-04-22-at-11.08.22-AM.jpeg'} />
+         
         </StyledLink>
+        
         <MobileMenu />
       </BrandContainer>
       <Nav />
@@ -106,11 +109,13 @@ const StyledLink = styled(Link)`
   }
 `;
 
+
 const ImageStyled = styled(Image)`
     width: 90px;
     height: 90px;
     margin-left: 1rem;
     margin-top: 5px;
+    border-radius: 50%; 
 
     @media(min-width: 768px) {
           width: 120px;
