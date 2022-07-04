@@ -13,7 +13,7 @@ import { faSearchPlus, faMobileAlt, faShoppingCart, faHeart, faClock } from '@fo
 
 import Loading from './Loading';
 
-import {bookAdventure, ourTours, viewMore} from '../Root';
+import {ourTours, viewMore} from '../Root';
 
 import CarouselBackground from './CarouselBackground';
 
@@ -21,11 +21,22 @@ import CarouselBackground from './CarouselBackground';
 import { AnimationOnScroll } from 'react-animation-on-scroll';
 import ScrollAnimations from "animate.css/animate.min.css";
 
-const HomePage = ({state, actions}) => {
+import ImageComponent from './ImageComponent';
 
-    const arrIcons = [faSearchPlus, faMobileAlt, faShoppingCart, faHeart]
+import Script from "@frontity/components/script";
+
+const MyComponent = () => (
+    <Script src="https://apps.elfsight.com/p/platform.js" defer />
+);
+
+
+const HomePage = ({state, actions, libraries}) => {
+
+    const arrIcons = [faSearchPlus, faMobileAlt, faHeart]
 
     const pageHome = state.source.page[19];
+
+    const Html2react = libraries.html2react.Component;
 
     useEffect( () => {
 
@@ -53,26 +64,18 @@ const HomePage = ({state, actions}) => {
         })
     }
 
+     // Component exposed by html2react.
+    const Html2React = libraries.html2react.Component;
+
     return ( 
         <>           
         {typeof pageHome === "undefined" ? <Loading /> : 
-        <>            
+        <>  
+            <Global styles = {ScrollAnimations} />          
             <CarouselBackground />
-
-                <h2>
-                    {pageHome.acf.about_title}
-                </h2>
-              
-                <p>
-                    {pageHome.acf.description_about}
-                </p>
-             
-            <Global styles = {ScrollAnimations} />
-
-            <CarouselBackground />
-            
+          
             <AboutContainer>
-                <AnimationOnScroll animateIn="animate__fadeIn" delay={100} duration={1.5}>
+                <AnimationOnScroll animateIn="animate__fadeIn" delay={50} duration={1}>
                     <div>
                         <h2>
                             {pageHome.acf.about_title}
@@ -80,27 +83,23 @@ const HomePage = ({state, actions}) => {
                     </div>
                 </AnimationOnScroll>
             
-                <AnimationOnScroll animateIn="animate__fadeIn" delay={100} duration={1.5}>
-                    <div>
-                        <p>
-                            {pageHome.acf.description_about}
-                        </p>
-                    </div>
+                <AnimationOnScroll animateIn="animate__fadeIn" delay={50} duration={1}>
+                    <Content>
+                        <Html2react html={pageHome.content.rendered} />
+                    </Content>
                 </AnimationOnScroll>
 
-                <AnimationOnScroll animateIn="animate__fadeIn" delay={100} duration={1.5}>
+                <AnimationOnScroll animateIn="animate__fadeIn" delay={50} duration={1}>
                     <div>
                         <LinkButtonHome href="/fulltours">{ourTours}</LinkButtonHome>
                     </div>
                 </AnimationOnScroll>
                 
             </AboutContainer>
-            
+
             <ToursContainer>
 
-                    <h2>{pageHome.acf.title_third_section}</h2>
-              
-                    <AnimationOnScroll animateIn="animate__fadeIn" delay={100} duration={1.5}>
+                    <AnimationOnScroll animateIn="animate__fadeIn" delay={50} duration={1}>
                         <h2>{pageHome.acf.title_third_section}</h2>
                     </AnimationOnScroll>      
                     
@@ -109,7 +108,7 @@ const HomePage = ({state, actions}) => {
                         {
                             Object.keys(pageHome.acf.icons_text_containter).map( (elem, idx) => {
                                 return(
-                                    <AnimationOnScroll animateIn="animate__fadeIn" delay={100} duration={1.5}>
+                                    <AnimationOnScroll animateIn="animate__fadeIn" delay={50} duration={1}>
                                         <IconsInfo>
                                             <FontAwesomeIconStyled icon = {arrIcons[idx]} />
                                             <h3>{pageHome.acf.icons_text_containter[elem].title}</h3>
@@ -121,10 +120,15 @@ const HomePage = ({state, actions}) => {
                         }
                     </IconsContainer>
 
-                <AnimationOnScroll animateIn="animate__fadeIn" delay={100} duration={1.5}>
-                    <h2>{ourTours}</h2>
-                </AnimationOnScroll>
-      
+                    <TripAdvisorContainer>
+                        <MyComponent />
+                        <div class="elfsight-app-192fb416-d175-475a-9223-5c368a7c7c46"></div>
+                    </TripAdvisorContainer>
+
+                    <AnimationOnScroll animateIn="animate__fadeIn" delay={50} duration={1}>
+                        <h2>{ourTours}</h2>
+                    </AnimationOnScroll>
+        
                     <hr></hr>
               
                 {
@@ -135,11 +139,12 @@ const HomePage = ({state, actions}) => {
                             {
                                 tours.reverse().map( tour => {
                                     return (
-                                        <AnimationOnScroll animateIn="animate__fadeIn" delay={100} duration={1.5}>
+                                        <AnimationOnScroll animateIn="animate__fadeIn" delay={50} duration={1}>
                                             <TourItem>
                                                 <Link href={tour.link}>
                                                                                             
-                                                    <ImageTourStyled src={tour.acf.image_tour.sizes.medium} />
+                                                    {/* <ImageTourStyled src={tour.acf.image_tour.sizes.medium} /> */}
+                                                    <ImageComponent media={tour.acf.image_tour.sizes} alt={tour.acf.image_tour.alt} elem="home" />
 
                                                     <InfoTour>
                                                         <h3>{tour.acf.title}</h3>
@@ -167,11 +172,10 @@ const HomePage = ({state, actions}) => {
                     :null
                 }
 
-
             </ToursContainer>
 
             <WarrantyGroup>
-            <AnimationOnScroll animateIn="animate__fadeIn" delay={100} duration={1.5}>
+            <AnimationOnScroll animateIn="animate__fadeIn" delay={50} duration={1}>
                 <h3>{pageHome.acf.images_warranty.title}</h3>
             </AnimationOnScroll>
 
@@ -179,7 +183,7 @@ const HomePage = ({state, actions}) => {
                         {
                             Object.keys(pageHome.acf.images_warranty.group_images).map( elem => {
                                 return(
-                                    <AnimationOnScroll animateIn="animate__fadeInLeft" delay={100} duration={1.5}>
+                                    <AnimationOnScroll animateIn="animate__fadeInLeft" delay={50} duration={1}>
                                         <ImageStyleWarranty src={pageHome.acf.images_warranty.group_images[elem].sizes.medium} />
                                     </AnimationOnScroll>
                                    
@@ -190,21 +194,21 @@ const HomePage = ({state, actions}) => {
             </WarrantyGroup>       
 
             <WarrantyGroup>
-                <AnimationOnScroll animateIn="animate__fadeIn" delay={100} duration={1.5}>
+                <AnimationOnScroll animateIn="animate__fadeIn" delay={50} duration={1}>
                     <h3>{pageHome.acf.images_licenses.title}</h3>
                 </AnimationOnScroll>
 
                 <LicensesGroup>
-                        {
-                            Object.keys(pageHome.acf.images_licenses.group_images).map( elem => {
-                                return(
-                                    <AnimationOnScroll animateIn="animate__fadeIn" delay={100} duration={1.5}>
-                                        <ImagesLicenses src={pageHome.acf.images_licenses.group_images[elem].sizes.medium} />
-                                    </AnimationOnScroll>
-                                   
-                                )
-                            })
-                        }
+                    {
+                        Object.keys(pageHome.acf.images_licenses.group_images).map( elem => {
+                            return(
+                                <AnimationOnScroll animateIn="animate__fadeIn" delay={50} duration={1}>
+                                    <ImagesLicenses src={pageHome.acf.images_licenses.group_images[elem].sizes.medium} />
+                                </AnimationOnScroll>
+                                
+                            )
+                        })
+                    }
                 </LicensesGroup>
             </WarrantyGroup>          
         </>
@@ -305,7 +309,7 @@ export const AboutContainer = styled.div`
     justify-content: center;
     align-items: center;
     background-color: #f4623a;
-    padding: 2rem 35rem;
+    padding: 2rem 22rem;
 
     @media(max-width: 768px) {
         padding: 1rem 0;
@@ -318,19 +322,21 @@ export const AboutContainer = styled.div`
     }
 
     hr {
-            display: flex;
-            width: 3.25rem;
-            border-color: #f4623a;
-            border-top: 3px solid #fff;
-        }
+        display: flex;
+        width: 3.25rem;
+        border-color: #f4623a;
+        border-top: 3px solid #fff;
+    }
 
     p {
-        font-size: 1.3rem;
+        font-size: 1.1rem;
         color: rgba(255,255,255,.5);
-        text-align: center;
+        text-align: justify;
+        margin-bottom: 1rem;
+        color: #fff;
     }   
 
-    div {
+    /* div {
 
         display: flex;
         justify-content: flex-start;
@@ -340,7 +346,23 @@ export const AboutContainer = styled.div`
         @media(max-width: 768px) {
             justify-content: space-between;
         }
-    }
+    } */
+`
+
+const Content = styled.div`
+    color: #000;
+    padding: 2rem;
+`;
+
+export const TripAdvisorContainer = styled.div`
+        margin-top: 2rem;
+        margin-bottom: 3rem;
+
+
+        @media(max-width: 768px) {
+            padding: 0 1rem;
+            overflow-x: hidden;
+        }
 `
 
 export const ToursContainer = styled.div`
@@ -375,7 +397,7 @@ export const ToursContainer = styled.div`
 
 export const IconsContainer = styled.div`
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     margin: 4rem 0;
 

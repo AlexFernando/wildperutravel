@@ -12,7 +12,7 @@ const NavBar = () => {
         
         <Navigation>
           
-            <Link href="/"><ImageLogo src={Logo}/></Link>
+            <Link href="/" alt="logo"><ImageLogo src={Logo}/></Link>
 
             <Toggle
                 navbarOpen={navbarOpen}

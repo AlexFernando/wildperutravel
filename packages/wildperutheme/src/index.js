@@ -1,3 +1,4 @@
+import React from 'react';
 import Root from './Root';
 import image from "@frontity/html2react/processors/image";
 import iframe from "@frontity/html2react/processors/iframe";

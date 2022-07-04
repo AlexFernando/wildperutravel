@@ -8,8 +8,8 @@ const CarouselBackground = () => {
   return (
 
     <>
-    <Global styles={CarouselStyles} />
-    <Slider images={Images} />
+      <Global styles={CarouselStyles} />
+      <Slider images={Images} />
     </>
   );
 }
