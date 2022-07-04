@@ -34,6 +34,31 @@ body {
   height: 100vh;
 }
 
+.slider--content h1 {
+  font-size: 3rem;
+  color: #fff;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .slider--content h1 {
+    font-size: 2.2rem;
+  }
+}
+
+.slider--content h2 {
+  font-size: 2.5rem;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .slider--content h2 {
+    font-size: 1.8rem;
+  }
+}
+
+
 .slider--feature {
   text-align: center;
 }

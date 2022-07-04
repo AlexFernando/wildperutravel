@@ -90,10 +90,10 @@ const Root = ({state, actions}) => {
                     }
 
                 
-                     /* * {
+                    /* * {
                         border: 1px solid #f00 !important;
-                    }    */
-                     
+                    }   
+                      */
                     p {
                         font-family: 'Montserrat', sans-serif;
                         font-weight: 400;
@@ -105,6 +105,9 @@ const Root = ({state, actions}) => {
                 <link rel="preconnect" href="https://fonts.gstatic.com" />
                 <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'"/> 
                 <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+                <title>Wild Peru Travels - Tour Operator</title>
+                <meta name="description" content="Wild Peru travel, your best travel agency in Cusco. We will organize your tours, like Machu Picchu, Rainbow Mountains, Salkantay trek, Inka Trail and more, so you can have the best experience." />
+                <html lang="en" />
             </Head>
 
         {/** Navbar */}       

@@ -17,7 +17,7 @@ const Header = ({ state }) => {
       <BrandContainer>
         <StyledLink link="/">
 
-          <ImageStyled src={'https://restapi.wildfreewalkingtours.com/wp-content/uploads/2022/04/WhatsApp-Image-2022-04-22-at-11.08.22-AM.jpeg'} />
+          <ImageStyled alt="logo" src={'https://wildperu.wildfreewalkingtours.com/wp-content/uploads/2022/04/WhatsApp-Image-2022-04-22-at-11.08.22-AM.jpeg'} />
          
         </StyledLink>
         

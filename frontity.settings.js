@@ -4,7 +4,7 @@ const settings = [
   "name": "wildperutravel",
   "state": {
     "frontity": {
-      "url": "https://restapi.wildfreewalkingtours.com/",
+      "url": "https://wildperu.wildfreewalkingtours.com",
       "title": "Wild Peru Travel",
       "description": "WordPress installation for Wild Peru Travel Website"
     },
@@ -39,7 +39,7 @@ const settings = [
       "name": "@frontity/wp-source",
       "state": {
         "source": {
-          "api": "https://restapi.wildfreewalkingtours.com/wp-json/",
+          "api": "https://wildperu.wildfreewalkingtours.com/wp-json/",
 
           "params": {
             per_page: 100,
@@ -70,7 +70,7 @@ const settings = [
     "match": [".*wildperutravels.com\/es(\/.*)?$"],
     "state": {
       "frontity": {
-        "url": "https://restapi.wildfreewalkingtours.com/es/",
+        "url": "https://wildperu.wildfreewalkingtours.com/es/",
         "title": "Wild Peru Travel",
         "description": "WordPress installation for Wild Peru Travel Website"
       },
@@ -104,7 +104,7 @@ const settings = [
         "name": "@frontity/wp-source",
         "state": {
           "source": {
-            "api": "https://restapi.wildfreewalkingtours.com/es/wp-json/",
+            "api": "https://wildperu.wildfreewalkingtours.com/es/wp-json/",
   
             "subdirectory": "/es",
             "homepage": "/homepage",

@@ -21,20 +21,21 @@ const Slider = ({images}) => {
       <>
         <Global styles={CarouselStyles} />
         <Global styles = {ScrollAnimations} />
-        <div className="slider" ref={slideImage}>
+        <div className="slider" ref={slideImage} title="background image">
             <div className="slider--content">
-              <button onClick={goToPreviousSlide} className="slider__btn-left">
+              <button onClick={goToPreviousSlide} className="slider__btn-left" aria-label="slide Left">
                 <FontAwesomeIcon icon ={faAngleLeft}/>
               </button>
               <AnimationOnScroll animateIn="animate__fadeIn">
+                <h1>“EXPLORA LO MEJOR DE SUDAMERICA”</h1>
                 <div className="slider--feature">
-                  <h1 ref={slideText} className="feature--title"></h1>
+                  <h2 ref={slideText} className="feature--title"></h2>
                   <p  className="feature--text">Your total satisfaction is our goal, our reason for existence.</p>
                   <p  className="feature--text">We are committed to the highest quality standards.</p>
                   <LinkButtonGetStarted href="/fulltours">GET STARTED</LinkButtonGetStarted>
                 </div>
               </AnimationOnScroll>
-              <button onClick={goToNextSlide} className="slider__btn-right">
+              <button onClick={goToNextSlide} className="slider__btn-right" aria-label="slide right">
                 <FontAwesomeIcon icon ={faAngleRight}/>
               </button>
             </div>

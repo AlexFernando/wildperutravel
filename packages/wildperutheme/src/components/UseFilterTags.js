@@ -9,7 +9,7 @@ const useFilterTags = () => {
     useEffect(() => {
 
         async function fetchMyAPI() {
-            let response = await fetch('https://restapi.wildfreewalkingtours.com/wp-json/wp/v2/tags');
+            let response = await fetch('https://wildperu.wildfreewalkingtours.com/wp-json/wp/v2/tags');
 
             response = await response.json();
 

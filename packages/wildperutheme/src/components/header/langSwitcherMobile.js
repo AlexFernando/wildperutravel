@@ -43,8 +43,8 @@ const LangSwitcherMobile = ({state, actions}) => {
   return(
 
       <FlagContainer>
-          <a href={myLink}><ImageFlagStyles src={'https://restapi.wildfreewalkingtours.com/wp-content/uploads/2022/04/US-flag.png'}/></a>
-          <a href={linkSpanish}> <ImageFlagStyles src={'https://restapi.wildfreewalkingtours.com/wp-content/uploads/2022/04/spanish_flag.png'}/> </a>
+          <a href={myLink}><ImageFlagStyles src={'https://wildperu.wildfreewalkingtours.com/wp-content/uploads/2022/04/US-flag.png'}/></a>
+          <a href={linkSpanish}> <ImageFlagStyles src={'https://wildperu.wildfreewalkingtours.com/wp-content/uploads/2022/04/spanish_flag.png'}/> </a>
           {/* <a href={linkFrench}><ImageFlagStyles src={FrenchImage}/> </a>  */}
       </FlagContainer>
   
