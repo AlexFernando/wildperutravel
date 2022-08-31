@@ -61,7 +61,7 @@ const MachuPicchu = ({state, actions}) => {
             <Global styles = {ScrollAnimations} />
 
             <BackgroundColor background = {pageMachu.acf.image_header.sizes.large}>    
-                <AnimationOnScroll animateIn="animate__fadeIn" delay={100} duration={1.5}>
+                <AnimationOnScroll animateIn="animate__fadeIn" delay={100} duration={1.5} animateOnce={true}>
                     <h3>{pageMachu.acf.title}</h3>
                 </AnimationOnScroll>
             </BackgroundColor>
@@ -77,7 +77,7 @@ const MachuPicchu = ({state, actions}) => {
             </SummaryText> */}
 
             <ToursContainer>
-                <AnimationOnScroll animateIn="animate__fadeIn" delay={100} duration={1.5}>
+                <AnimationOnScroll animateIn="animate__fadeIn" delay={100} duration={1.5} animateOnce={true}>
                     <h2>{ourTours}</h2>
                 </AnimationOnScroll>
                 <hr></hr>
@@ -90,7 +90,7 @@ const MachuPicchu = ({state, actions}) => {
                         {
                             tours.reverse().map( tour => {
                                 return (
-                                    <AnimationOnScroll animateIn="animate__fadeIn" delay={100} duration={1.5}>
+                                    <AnimationOnScroll animateIn="animate__fadeIn" delay={100} duration={1.5} animateOnce={true}>
                                     <TourItem>
                                         <Link href={tour.link}>
                                             

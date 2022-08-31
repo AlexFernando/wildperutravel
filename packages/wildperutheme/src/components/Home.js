@@ -23,11 +23,13 @@ import ScrollAnimations from "animate.css/animate.min.css";
 
 import ImageComponent from './ImageComponent';
 
+import ReadMore from '../helpers/ReadMore';
+
 import Script from "@frontity/components/script";
 
-const MyComponent = () => (
-    <Script src="https://apps.elfsight.com/p/platform.js" defer />
-);
+// const MyComponent = () => (
+//     <Script src="https://apps.elfsight.com/p/platform.js" defer />
+// );
 
 
 const HomePage = ({state, actions, libraries}) => {
@@ -75,7 +77,7 @@ const HomePage = ({state, actions, libraries}) => {
             <CarouselBackground />
           
             <AboutContainer>
-                <AnimationOnScroll animateIn="animate__fadeIn" delay={50} duration={1}>
+                <AnimationOnScroll animateIn="animate__fadeIn" delay={50} duration={1} animateOnce={true}>
                     <div>
                         <h2>
                             {pageHome.acf.about_title}
@@ -83,13 +85,13 @@ const HomePage = ({state, actions, libraries}) => {
                     </div>
                 </AnimationOnScroll>
             
-                <AnimationOnScroll animateIn="animate__fadeIn" delay={50} duration={1}>
+                <AnimationOnScroll animateIn="animate__fadeIn" delay={50} duration={1} animateOnce={true}>
                     <Content>
                         <Html2react html={pageHome.content.rendered} />
                     </Content>
                 </AnimationOnScroll>
 
-                <AnimationOnScroll animateIn="animate__fadeIn" delay={50} duration={1}>
+                <AnimationOnScroll animateIn="animate__fadeIn" delay={50} duration={1} animateOnce={true}>
                     <div>
                         <LinkButtonHome href="/fulltours">{ourTours}</LinkButtonHome>
                     </div>
@@ -99,7 +101,7 @@ const HomePage = ({state, actions, libraries}) => {
 
             <ToursContainer>
 
-                    <AnimationOnScroll animateIn="animate__fadeIn" delay={50} duration={1}>
+                    <AnimationOnScroll animateIn="animate__fadeIn" delay={50} duration={1} animateOnce={true}>
                         <h2>{pageHome.acf.title_third_section}</h2>
                     </AnimationOnScroll>      
                     
@@ -108,7 +110,7 @@ const HomePage = ({state, actions, libraries}) => {
                         {
                             Object.keys(pageHome.acf.icons_text_containter).map( (elem, idx) => {
                                 return(
-                                    <AnimationOnScroll animateIn="animate__fadeIn" delay={50} duration={1}>
+                                    <AnimationOnScroll animateIn="animate__fadeIn" delay={50} duration={1} animateOnce={true}>
                                         <IconsInfo>
                                             <FontAwesomeIconStyled icon = {arrIcons[idx]} />
                                             <h3>{pageHome.acf.icons_text_containter[elem].title}</h3>
@@ -120,12 +122,54 @@ const HomePage = ({state, actions, libraries}) => {
                         }
                     </IconsContainer>
 
-                    <TripAdvisorContainer>
+                    {/* <TripAdvisorContainer>
                         <MyComponent />
                         <div class="elfsight-app-192fb416-d175-475a-9223-5c368a7c7c46"></div>
-                    </TripAdvisorContainer>
+                    </TripAdvisorContainer> */}
 
-                    <AnimationOnScroll animateIn="animate__fadeIn" delay={50} duration={1}>
+                        <WriteReviewBox>
+                            <LeftSideBox>
+                                {/* <span>
+                                    <ImageReviewBox alt="tripadvisor_reviews" width={Math.floor(pageHome.acf.images_group.tripadvisor_reviews.sizes["medium-width"]/2)} height={Math.floor(pageHome.acf.images_group.tripadvisor_reviews.sizes["medium-height"]/2)} src={pageHome.acf.images_group.tripadvisor_reviews.sizes.medium}/>
+                                    <p>Rating</p>
+                                </span> */}
+
+                                <MyStars>
+                                    <h3>5.0</h3>
+                                    <span>
+                                        ★★★★★
+                                    </span>
+                                </MyStars>
+ 
+                            </LeftSideBox>
+                            <ButtonWriteReview href="https://www.tripadvisor.com/Attraction_Review-g294314-d14803688-Reviews-Wild_Peru_Travel-Cusco_Cusco_Region.html" target="_blank">Write a Review</ButtonWriteReview>
+                        </WriteReviewBox>
+
+                        <TripAdvisorReviews>
+                            {
+                                Object.keys(pageHome.acf.testimonials).map( item => {
+
+                                    return(
+                                        <ReviewItem>
+                                            <h4>{pageHome.acf.testimonials[item].client_name}</h4>
+                                            <div>
+                                            <span>★★★★★</span>
+                                            <span>{pageHome.acf.testimonials[item].days_ago}</span>
+                                            </div>
+
+                                            <h3>{pageHome.acf.testimonials[item].title}</h3>
+                                            <ReadMore content= {pageHome.acf.testimonials[item].comment_description} limit={60} />
+
+                                        </ReviewItem>
+                                    )
+                                   
+                                })
+
+                            }
+                            
+                        </TripAdvisorReviews>
+
+                    <AnimationOnScroll animateIn="animate__fadeIn" delay={50} duration={1} animateOnce={true}>
                         <h2>{ourTours}</h2>
                     </AnimationOnScroll>
         
@@ -139,7 +183,7 @@ const HomePage = ({state, actions, libraries}) => {
                             {
                                 tours.reverse().map( tour => {
                                     return (
-                                        <AnimationOnScroll animateIn="animate__fadeIn" delay={50} duration={1}>
+                                        <AnimationOnScroll animateIn="animate__fadeIn" delay={50} duration={1} animateOnce={true}>
                                             <TourItem>
                                                 <Link href={tour.link}>
                                                                                             
@@ -175,7 +219,7 @@ const HomePage = ({state, actions, libraries}) => {
             </ToursContainer>
 
             <WarrantyGroup>
-            <AnimationOnScroll animateIn="animate__fadeIn" delay={50} duration={1}>
+            <AnimationOnScroll animateIn="animate__fadeIn" delay={50} duration={1} animateOnce={true}>
                 <h3>{pageHome.acf.images_warranty.title}</h3>
             </AnimationOnScroll>
 
@@ -183,7 +227,7 @@ const HomePage = ({state, actions, libraries}) => {
                         {
                             Object.keys(pageHome.acf.images_warranty.group_images).map( elem => {
                                 return(
-                                    <AnimationOnScroll animateIn="animate__fadeInLeft" delay={50} duration={1}>
+                                    <AnimationOnScroll animateIn="animate__fadeInLeft" delay={50} duration={1} animateOnce={true}>
                                         <ImageStyleWarranty src={pageHome.acf.images_warranty.group_images[elem].sizes.medium} />
                                     </AnimationOnScroll>
                                    
@@ -194,7 +238,7 @@ const HomePage = ({state, actions, libraries}) => {
             </WarrantyGroup>       
 
             <WarrantyGroup>
-                <AnimationOnScroll animateIn="animate__fadeIn" delay={50} duration={1}>
+                <AnimationOnScroll animateIn="animate__fadeIn" delay={50} duration={1} animateOnce={true}>
                     <h3>{pageHome.acf.images_licenses.title}</h3>
                 </AnimationOnScroll>
 
@@ -202,7 +246,7 @@ const HomePage = ({state, actions, libraries}) => {
                     {
                         Object.keys(pageHome.acf.images_licenses.group_images).map( elem => {
                             return(
-                                <AnimationOnScroll animateIn="animate__fadeIn" delay={50} duration={1}>
+                                <AnimationOnScroll animateIn="animate__fadeIn" delay={50} duration={1} animateOnce={true}>
                                     <ImagesLicenses src={pageHome.acf.images_licenses.group_images[elem].sizes.medium} />
                                 </AnimationOnScroll>
                                 
@@ -527,9 +571,116 @@ const WarrantyGroup = styled.div`
     @media(max-width: 768px) {
         padding: 2rem 10% 10% 10%;
     }
-
-    
 `
+
+//TRIP ADVISOR TESTIMNIAL
+
+const WriteReviewBox = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: .5rem;
+    background-color: rgba(17, 17, 17, 0.05);
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+    } 
+`
+
+const LeftSideBox = styled.div`
+    span {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        font-size: 1.2rem;
+    }
+`
+
+const MyStars = styled.div`
+    display: flex;
+    justify-content: center;
+    align-content: center;
+
+    h3 {
+        margin: 0 auto;
+        padding: 0 auto;
+        font-size: 1.2rem;
+    }
+
+    span {
+        margin: 0 auto;
+        padding: 0 auto;
+        font-size: 1.2rem;
+        color: rgb(252, 191, 2) !important;
+    }
+`
+const ImageReviewBox = styled(Image)`
+    object-fit: contain;
+`
+const ButtonWriteReview = styled.a`
+    text-decoration: none;
+    background-color: rgb(25, 123, 255);
+    color: rgb(255, 255, 255);
+    align-self: center;
+    border: 4px solid rgba(0, 0, 0, 0);
+    padding: .5rem;
+    border-radius: 2px;
+    font-size: 1rem;
+    cursor: pointer;
+`
+const TripAdvisorReviews = styled.div`
+    display: flex;
+    margin-bottom: 2rem;
+
+    @media (max-width: 768px) {
+        padding: 1rem;
+        flex-direction: column;
+    } 
+`
+
+const ReviewItem = styled.div`
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: .5rem;
+    background-color: rgba(17, 17, 17, 0.05);
+    flex-basis: 25%;
+
+    h3 {
+        font-size: 1rem;
+        color: #333333;
+        margin-bottom: 0;
+        line-height: 1.5;
+        margin-top: .5rem;
+    }
+
+    h4 {
+        font-size: .9rem;
+        color: #333333;
+        margin-bottom: 0;
+    }
+
+    span {
+    
+        :nth-of-type(1){
+            font-size: 1.2rem;
+            color: rgb(252, 191, 2) !important
+        }
+
+        :nth-of-type(2) {
+            font-size: .8rem;
+            color: #333333;
+            margin-left: 1rem;
+        }
+    }
+    p {
+        margin: 0;
+        font-size: .9rem;
+        line-height: 1.5;
+    }
+`
+//END TRIP ADVISOR TESTIMONIAL
 
 const WarrantyImageGroup = styled.div`
     display: flex;

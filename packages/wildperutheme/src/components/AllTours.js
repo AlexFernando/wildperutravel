@@ -76,14 +76,14 @@ const FullTours = ({state, actions}) => {
 
                 <h3>{pageAllTours.acf.title}</h3>         
 
-                <AnimationOnScroll animateIn="animate__fadeIn" delay={100} duration={1.5}>
+                <AnimationOnScroll animateIn="animate__fadeIn" delay={100} duration={1.5} animateOnce={true}>
                     <h3>{pageAllTours.acf.title}</h3>
                 </AnimationOnScroll>        
             </BackgroundColor>  
 
 
             <ToursContainer>
-                <AnimationOnScroll animateIn="animate__fadeIn" delay={100} duration={1.5}>
+                <AnimationOnScroll animateIn="animate__fadeIn" delay={100} duration={1.5} animateOnce={true}>
                     <h2>{ourTours}</h2>
                 </AnimationOnScroll>
                 <hr></hr>
@@ -100,7 +100,7 @@ const FullTours = ({state, actions}) => {
                         {
                             tours.reverse().map( tour => {
                                 return (
-                                    <AnimationOnScroll animateIn="animate__fadeIn" delay={100} duration={1.5}>
+                                    <AnimationOnScroll animateIn="animate__fadeIn" delay={100} duration={1.5} animateOnce={true}>
                                     <TourItem>
                                         <Link href={tour.link}>
                                             
