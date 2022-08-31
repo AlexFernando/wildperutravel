@@ -27,7 +27,7 @@ const Slider = ({images}) => {
                 <FontAwesomeIcon icon ={faAngleLeft}/>
               </button>
               <AnimationOnScroll animateIn="animate__fadeIn">
-                <h1>“EXPLORA LO MEJOR DE SUDAMERICA”</h1>
+                <h1>“EXPLORE THE BEST OF SOUTH AMERICA”</h1>
                 <div className="slider--feature">
                   <h2 ref={slideText} className="feature--title"></h2>
                   <p  className="feature--text">Your total satisfaction is our goal, our reason for existence.</p>

@@ -59,13 +59,13 @@ const AdventuresTours = ({state, actions}) => {
             <Global styles = {ScrollAnimations} />
 
             <BackgroundColor background = {pageMachu.acf.image_header.sizes.large}>    
-                <AnimationOnScroll animateIn="animate__fadeIn" delay={100} duration={1.5}>  
+                <AnimationOnScroll animateIn="animate__fadeIn" delay={100} duration={1.5} animateOnce={true}>  
                     <h3>{pageMachu.acf.title}</h3>
                 </AnimationOnScroll>    
             </BackgroundColor>
 
             <ToursContainer>
-                <AnimationOnScroll animateIn="animate__fadeIn" delay={100} duration={1.5}>  
+                <AnimationOnScroll animateIn="animate__fadeIn" delay={100} duration={1.5} animateOnce={true}>  
                     <h2>{ourTours}</h2>
                 </AnimationOnScroll> 
                 <hr></hr>
@@ -78,7 +78,7 @@ const AdventuresTours = ({state, actions}) => {
                         {
                             tours.reverse().map( tour => {
                                 return (
-                                    <AnimationOnScroll animateIn="animate__fadeIn" delay={100} duration={1.5}>  
+                                    <AnimationOnScroll animateIn="animate__fadeIn" delay={100} duration={1.5} animateOnce={true}>  
                                     <TourItem>
                                         <Link href={tour.link}>
                                             <ImageTourStyled src={tour.acf.image_tour.sizes.medium} />
