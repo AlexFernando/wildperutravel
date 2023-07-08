@@ -1,5 +1,6 @@
 import React from 'react';
 import {styled} from "frontity";
+import LinkFooter from './LinkFooter'
 
 const FooterContainer = styled.div`
     background-color: #0c884a;
@@ -64,7 +65,15 @@ const Footer = ({title}) => {
         <footer>   
             <FooterContainer>
                 <ElementFooter>
+                    <LinkFooter href="/privacy-policy-2">Privacy Policy</LinkFooter>
+                 
+                </ElementFooter>   
+                <ElementFooter>
                 &copy; {title} - {year} - All Rights Reserved. 
+                </ElementFooter>  
+                <ElementFooter>
+                    <LinkFooter href="/terms-and-conditions">  Terms &amp; Conditions</LinkFooter>
+                  
                 </ElementFooter>                
             </FooterContainer>
         </footer>

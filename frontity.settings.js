@@ -4,7 +4,7 @@ const settings = [
   "name": "wildperutravel",
   "state": {
     "frontity": {
-      "url": "https://wildperu.wildfreewalkingtours.com",
+      "url": "https://wildperu2023.wildfreewalkingtours.com",
       "title": "Wild Peru Travel",
       "description": "WordPress installation for Wild Peru Travel Website"
     },
@@ -21,10 +21,11 @@ const settings = [
           "menu": [
             ["About", "/"],
             ["Tours", "/fulltours/"],
+            ["Packages", "/packages/"],
             ["Machu Picchu", "/machupicchu/"],
             ["Sacred Valley", "/sacredvalley/"],
             ["Adventure Tours", "/adventuretours/"],            
-            ["Contact", "/contact-tour/"]
+            ["Contact", "/contact-tour/"],
           ],
           "featured": {
             "showOnList": true,
@@ -39,7 +40,7 @@ const settings = [
       "name": "@frontity/wp-source",
       "state": {
         "source": {
-          "api": "https://wildperu.wildfreewalkingtours.com/wp-json/",
+          "api": "https://wildperu2023.wildfreewalkingtours.com/wp-json/",
 
           "params": {
             per_page: 100,
@@ -70,7 +71,7 @@ const settings = [
     "match": [".*wildperutravels.com\/es(\/.*)?$"],
     "state": {
       "frontity": {
-        "url": "https://wildperu.wildfreewalkingtours.com/es/",
+        "url": "https://wildperu2023.wildfreewalkingtours.com/es/",
         "title": "Wild Peru Travel",
         "description": "WordPress installation for Wild Peru Travel Website"
       },
@@ -104,7 +105,7 @@ const settings = [
         "name": "@frontity/wp-source",
         "state": {
           "source": {
-            "api": "https://wildperu.wildfreewalkingtours.com/es/wp-json/",
+            "api": "https://wildperu2023.wildfreewalkingtours.com/es/wp-json/",
   
             "subdirectory": "/es",
             "homepage": "/homepage",

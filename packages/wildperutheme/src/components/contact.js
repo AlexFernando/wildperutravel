@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {styled, connect } from "frontity";
-import {faMapMarkerAlt, faStreetView, faEnvelope} from '@fortawesome/free-solid-svg-icons';
+import {faMapMarkerAlt, faStreetView, faEnvelope, faBuilding, faUserTie, faBook} from '@fortawesome/free-solid-svg-icons';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faYoutube, faFacebookSquare} from '@fortawesome/free-brands-svg-icons';
@@ -80,10 +80,10 @@ const ContactElement = styled.div`
         font-weight: 200;
         margin-bottom: 1rem;
         letter-spacing: 1px;
-        font-size: 1.2rem;
+        font-size: 1rem;
 
         @media(max-width: 768px) {
-            font-size: 1.1rem;
+            font-size: .9rem;
         }
 
         a {
@@ -97,10 +97,10 @@ const ContactElement = styled.div`
 
 const FontAwesomeIconStyled = styled(FontAwesomeIcon)`
     margin-right: 1rem;
-    font-size: 2.5rem;
+    font-size: 2.2rem;
 
     @media(max-width: 768px) {
-        font-size : 1.8rem;
+        font-size : 1.5rem;
         margin-right: .5rem;
     }
 `;
@@ -180,8 +180,10 @@ const Contact = ({state, actions, libraries}) => {
                     </li>
                     <li><a href="mailto:wildperutravel@gmail.com"><FontAwesomeIconStyled icon={faEnvelope}/></a>{pageFooterInfo.acf.gmail}</li>
                     
-                    <li><FontAwesomeIconStyled icon={faMapMarkerAlt}/>{pageFooterInfo.acf.organization_name}</li>
-                   
+                    <li><FontAwesomeIconStyled icon={faBuilding}/>Razón Social: Wild Perú Travel E.I.R.L </li>
+                    <li><FontAwesomeIconStyled icon={faBook}/>RUC: 20603620896 </li>
+                    <li><FontAwesomeIconStyled icon={faUserTie}/>Representatne Legal: Casio Valdez Quispe. </li>
+                    
                     <li><FontAwesomeIconStyled icon={faStreetView}/>{pageFooterInfo.acf.street_office}</li>
 
                    

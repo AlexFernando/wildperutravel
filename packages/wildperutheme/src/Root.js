@@ -10,7 +10,9 @@ import AllTours from './components/AllTours';
 import ContactTours from './components/ContactTours';
 import Header from './components/header/header';
 import Sacredvalley from './components/SacredValley';
-import AdventuresTours from './components/AdventuresTours'
+import AdventuresTours from './components/AdventuresTours';
+import PrivacyPolicy from './components/PrivacyPolicy';
+import TermsConditions from './components/TermsConditions'
 
 export let bookAdventure = '';
 export let ourTours = '';
@@ -134,6 +136,10 @@ const Root = ({state, actions}) => {
 
         {state.router.link === "/contact-tour/" && <ContactTours />}
         {state.router.link === "/es/contact-tour/" && <ContactTours />}
+
+        
+        {state.router.link === "/privacy-policy-2/" && <PrivacyPolicy/>}
+        {state.router.link === "/terms-and-conditions/" && <TermsConditions />}
         {/**Other components */}
 {/*         
         {data.isFullProgram && <AllEvents />}  
