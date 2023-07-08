@@ -25,7 +25,11 @@ import ImageComponent from './ImageComponent';
 
 import ReadMore from '../helpers/ReadMore';
 
+//IMAGE ACCEPT ALL CARDS
+import cardspayments from '../images/cards.jpg'
+
 import Script from "@frontity/components/script";
+
 
 // const MyComponent = () => (
 //     <Script src="https://apps.elfsight.com/p/platform.js" defer />
@@ -240,6 +244,12 @@ const HomePage = ({state, actions, libraries}) => {
             <WarrantyGroup>
                 <AnimationOnScroll animateIn="animate__fadeIn" delay={50} duration={1} animateOnce={true}>
                     <h3>{pageHome.acf.images_licenses.title}</h3>
+
+                    <p>
+                        In this agency We do NOT promote or allow the sexual 
+                        exploitation of children and adolescents, or any other 
+                        criminal offense of which We become aware in the development of our activity, 
+                        following the Law No. 29408</p>
                 </AnimationOnScroll>
 
                 <LicensesGroup>
@@ -255,6 +265,11 @@ const HomePage = ({state, actions, libraries}) => {
                     }
                 </LicensesGroup>
             </WarrantyGroup>          
+
+            <WarrantyGroup>
+                    <h3>We accept all cards payments</h3>
+                    <ImagesLicenses src={cardspayments} />
+                </WarrantyGroup>
         </>
         }
         </>
@@ -561,12 +576,16 @@ export const ImageTourStyled = styled(Image)`
 const WarrantyGroup = styled.div`
     background-color: white;
     padding: 2rem 20% 10% 20%;
+
     h3 {
         font-size: 2rem;
         text-align: center;
         margin-bottom: 2rem;
     }
 
+    p {
+        margin-bottom: 2rem;
+    }
        
     @media(max-width: 768px) {
         padding: 2rem 10% 10% 10%;

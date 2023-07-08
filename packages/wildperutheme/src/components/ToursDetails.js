@@ -46,7 +46,7 @@ const TourDetails = ({state, actions}) => {
                     <Tab>{itinerary}</Tab>
                     <Tab>{include}</Tab>
                     <Tab>{price}</Tab>
-                    <Tab>Gallery</Tab>
+                    <Tab>Gallery</Tab> 
                 </TabList>
                 
                     <TabPanel>
@@ -98,6 +98,11 @@ const TourDetails = ({state, actions}) => {
                                 <h4>{postTour.acf.day_four_title}</h4>
 
                                 {postTour.acf.day_four_description.split("%").map( itemDescription => <p>{itemDescription}</p>)}
+
+
+                                <h4>{postTour.acf.day_five_title}</h4>
+
+                                {postTour.acf.day_five_description.split("%").map( itemDescription => <p>{itemDescription}</p>)}
                             </div>
                         </DescriptionContainer>
                     </TabPanel>
