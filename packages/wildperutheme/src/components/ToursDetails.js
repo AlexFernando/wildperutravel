@@ -61,11 +61,17 @@ const TourDetails = ({state, actions}) => {
                                 
                                 <ul>
                                     {
+                                        summaryItems.length > 0 ? 
+                                        
                                         summaryItems.map( itemList => { 
                                             return(
                                                 <li><FontAwesomeIconStyled icon={faDotCircle} /> {itemList}</li>
                                             )
+
+                                            
                                         })
+
+                                        : null
                                     }
                                 </ul>
                             </div>
@@ -85,24 +91,32 @@ const TourDetails = ({state, actions}) => {
 
                                 <h4>{postTour.acf.day_one_title}</h4>
                             
-                                {postTour.acf.day_one_description.split("%").map( itemDescription => <p>{itemDescription}</p>)}
+                                {postTour.acf.day_one_description.split("%").length >0 && postTour.acf.day_one_description.split("%").map( itemDescription => <p>{itemDescription}</p>)}
                                 
                                 <h4>{postTour.acf.day_two_title}</h4>
 
-                                {postTour.acf.day_two_description.split("%").map( itemDescription => <p>{itemDescription}</p>)}
+                                {postTour.acf.day_two_description.split("%").length >0 && postTour.acf.day_two_description.split("%").map( itemDescription => <p>{itemDescription}</p>)}
 
                                 <h4>{postTour.acf.day_three_title}</h4>
 
-                                {postTour.acf.day_three_description.split("%").map( itemDescription => <p>{itemDescription}</p>)}
+                                {postTour.acf.day_three_description.split("%").length >0 && postTour.acf.day_three_description.split("%").map( itemDescription => <p>{itemDescription}</p>)}
 
                                 <h4>{postTour.acf.day_four_title}</h4>
 
-                                {postTour.acf.day_four_description.split("%").map( itemDescription => <p>{itemDescription}</p>)}
+                                {postTour.acf.day_four_description.split("%").length >0 && postTour.acf.day_four_description.split("%").map( itemDescription => <p>{itemDescription}</p>)}
 
 
                                 <h4>{postTour.acf.day_five_title}</h4>
 
-                                {postTour.acf.day_five_description.split("%").map( itemDescription => <p>{itemDescription}</p>)}
+                                {postTour.acf.day_five_description.split("%").length >0 && postTour.acf.day_five_description.split("%").map( itemDescription => <p>{itemDescription}</p>)}
+
+                                <h4>{postTour.acf.day_six_title}</h4>
+
+                                {postTour.acf.day_six_description && postTour.acf.day_six_description.split("%").length >0 && postTour.acf.day_six_description.split("%").map( itemDescription => <p>{itemDescription}</p>)}
+
+                                <h4>{postTour.acf.day_seven_title}</h4>
+
+                                {postTour.acf.day_seven_description && postTour.acf.day_seven_description.split("%").length >0 && postTour.acf.day_seven_description.split("%").map( itemDescription => <p>{itemDescription}</p>)}
                             </div>
                         </DescriptionContainer>
                     </TabPanel>
@@ -158,7 +172,7 @@ const TourDetails = ({state, actions}) => {
                          
 
                             {
-                                postTour.acf.images_gallery ? 
+                                postTour.acf.images_gallery.image_one ? 
                                 
                                     <BorderGallery>
                                         <GalleryContainer>

@@ -13,7 +13,7 @@ import { faSearchPlus, faMobileAlt, faShoppingCart, faHeart, faClock } from '@fo
 
 import Loading from './Loading';
 
-import {ourTours, viewMore} from '../Root';
+import {ourTours, viewMore, bookTour} from '../Root';
 
 import CarouselBackground from './CarouselBackground';
 
@@ -30,11 +30,12 @@ import cardspayments from '../images/cards.jpg'
 
 import Script from "@frontity/components/script";
 
-
 // const MyComponent = () => (
 //     <Script src="https://apps.elfsight.com/p/platform.js" defer />
 // );
 
+import ToursHome from './ToursHome'
+import Packages from './PackageHome'
 
 const HomePage = ({state, actions, libraries}) => {
 
@@ -44,31 +45,31 @@ const HomePage = ({state, actions, libraries}) => {
 
     const Html2react = libraries.html2react.Component;
 
-    useEffect( () => {
+    // useEffect( () => {
 
-        if(state.theme.lang === "en") {
-            actions.source.fetch("/alltours")
-        }
+    //     if(state.theme.lang === "en") {
+    //         actions.source.fetch("/alltours")
+    //     }
 
-        else {
-            actions.source.fetch("/es/alltours")
-        }
-    }, [])
+    //     else {
+    //         actions.source.fetch("/es/alltours")
+    //     }
+    // }, [])
 
-    const data = state.theme.lang === "en" ? state.source.get('/alltours') : state.source.get('/es/alltours')
+    // const data = state.theme.lang === "en" ? state.source.get('/alltours') : state.source.get('/es/alltours')
 
-    let tours = [];
+    // let tours = [];
 
-    if(data.isReady) {
-        data.items.map( ({id}) => {
+    // if(data.isReady) {
+    //     data.items.map( ({id}) => {
 
-            const singleTour = state.source.alltours[id];
+    //         const singleTour = state.source.alltours[id];
 
-            if(singleTour.tags.length>0 && singleTour.tags[0] === 3 || singleTour.tags[1] === 3) {
-                tours.push(singleTour);
-            }
-        })
-    }
+    //         if(singleTour.tags.length>0 && singleTour.tags[0] === 3 || singleTour.tags[1] === 3) {
+    //             tours.push(singleTour);
+    //         }
+    //     })
+    // }
 
      // Component exposed by html2react.
     const Html2React = libraries.html2react.Component;
@@ -80,47 +81,47 @@ const HomePage = ({state, actions, libraries}) => {
             <Global styles = {ScrollAnimations} />          
             <CarouselBackground />
           
+          <SectionAbout>
             <AboutContainer>
-                <AnimationOnScroll animateIn="animate__fadeIn" delay={50} duration={1} animateOnce={true}>
                     <div>
                         <h2>
                             {pageHome.acf.about_title}
                         </h2>
                     </div>
-                </AnimationOnScroll>
-            
-                <AnimationOnScroll animateIn="animate__fadeIn" delay={50} duration={1} animateOnce={true}>
+                
                     <Content>
                         <Html2react html={pageHome.content.rendered} />
                     </Content>
-                </AnimationOnScroll>
+              
 
-                <AnimationOnScroll animateIn="animate__fadeIn" delay={50} duration={1} animateOnce={true}>
+                
                     <div>
-                        <LinkButtonHome href="/fulltours">{ourTours}</LinkButtonHome>
+                        <LinkButtonHome href="/contact">{bookTour}</LinkButtonHome>
                     </div>
-                </AnimationOnScroll>
+            
                 
             </AboutContainer>
-
+            </SectionAbout>
             <ToursContainer>
 
-                    <AnimationOnScroll animateIn="animate__fadeIn" delay={50} duration={1} animateOnce={true}>
+                    <Packages />
+
+                    <div>
                         <h2>{pageHome.acf.title_third_section}</h2>
-                    </AnimationOnScroll>      
-                    
+                    </div>
+
                     <IconsContainer>
 
                         {
                             Object.keys(pageHome.acf.icons_text_containter).map( (elem, idx) => {
                                 return(
-                                    <AnimationOnScroll animateIn="animate__fadeIn" delay={50} duration={1} animateOnce={true}>
+
                                         <IconsInfo>
                                             <FontAwesomeIconStyled icon = {arrIcons[idx]} />
                                             <h3>{pageHome.acf.icons_text_containter[elem].title}</h3>
                                             <p>{pageHome.acf.icons_text_containter[elem].paragraph}</p>
                                         </IconsInfo>
-                                    </AnimationOnScroll>
+                            
                                 )
                             })
                         }
@@ -173,51 +174,56 @@ const HomePage = ({state, actions, libraries}) => {
                             
                         </TripAdvisorReviews>
 
-                    <AnimationOnScroll animateIn="animate__fadeIn" delay={50} duration={1} animateOnce={true}>
-                        <h2>{ourTours}</h2>
-                    </AnimationOnScroll>
+                        {/* <h2>{ourTours}</h2>
+                
         
-                    <hr></hr>
+                    <hr></hr> */}
+
+                    <ToursHome />
               
                 {
 
-                    data.isReady && tours.length > 0 ? 
+                    // data.isReady && tours.length > 0 ? 
                   
-                        <ToursWrap>
-                            {
-                                tours.reverse().map( tour => {
-                                    return (
-                                        <AnimationOnScroll animateIn="animate__fadeIn" delay={50} duration={1} animateOnce={true}>
-                                            <TourItem>
-                                                <Link href={tour.link}>
+                    //     <ToursWrap>
+                    //         {
+                    //             tours.reverse().map( tour => {
+                    //                 return (
+                    //                     <AnimationOnScroll animateIn="animate__fadeIn" delay={50} duration={1} animateOnce={true}>
+                    //                         <TourItem>
+                    //                             <Link href={tour.link}>
                                                                                             
-                                                    {/* <ImageTourStyled src={tour.acf.image_tour.sizes.medium} /> */}
-                                                    <ImageComponent media={tour.acf.image_tour.sizes} alt={tour.acf.image_tour.alt} elem="home" />
+                    //                                 {/* <ImageTourStyled src={tour.acf.image_tour.sizes.medium} /> */}
+                    //                                 <ImageComponent media={tour.acf.image_tour.sizes} alt={tour.acf.image_tour.alt} elem="home" />
 
-                                                    <InfoTour>
-                                                        <h3>{tour.acf.title}</h3>
+                    //                                 <InfoTour>
+                    //                                     <h3>{tour.acf.title}</h3>
 
-                                                        <p>{tour.acf.description}</p>
+                    //                                     {/* <p>{tour.acf.description}</p> */}
+
+
+                    //                                     <ReadMoreCard content= {tour.acf.description} limit={60} />
+
                                                         
-                                                        <div>
-                                                            <p><FontAwesomeCardTour icon={faClock} />{tour.acf.full_days}</p>
-                                                            <span>{tour.acf.price}</span>
-                                                        </div>
+                    //                                     <div>
+                    //                                         <p><FontAwesomeCardTour icon={faClock} />{tour.acf.full_days}</p>
+                    //                                         <span>{tour.acf.price}</span>
+                    //                                     </div>
 
-                                                        <ViewMoreWrapper>
-                                                            <LinkButtonHomeSecond href={tour.link}>{viewMore}</LinkButtonHomeSecond>    
-                                                        </ViewMoreWrapper>                                            
-                                                    </InfoTour>                                                
-                                                </Link>
-                                            </TourItem>
-                                            </AnimationOnScroll>
+                    //                                     <ViewMoreWrapper>
+                    //                                         <LinkButtonHomeSecond href={tour.link}>{viewMore}</LinkButtonHomeSecond>    
+                    //                                     </ViewMoreWrapper>                                            
+                    //                                 </InfoTour>                                                
+                    //                             </Link>
+                    //                         </TourItem>
+                    //                         </AnimationOnScroll>
                                     
-                                    )
-                                })
-                            }
-                        </ToursWrap>
+                    //                 )
+                    //             })
+                    //         }
+                    //     </ToursWrap>
                
-                    :null
+                    // :null
                 }
 
             </ToursContainer>
@@ -228,16 +234,16 @@ const HomePage = ({state, actions, libraries}) => {
             </AnimationOnScroll>
 
                 <WarrantyImageGroup>
-                        {
-                            Object.keys(pageHome.acf.images_warranty.group_images).map( elem => {
-                                return(
-                                    <AnimationOnScroll animateIn="animate__fadeInLeft" delay={50} duration={1} animateOnce={true}>
-                                        <ImageStyleWarranty src={pageHome.acf.images_warranty.group_images[elem].sizes.medium} />
-                                    </AnimationOnScroll>
-                                   
-                                )
-                            })
-                        }
+                    {
+                        Object.keys(pageHome.acf.images_warranty.group_images).map( elem => {
+                            return(
+                                <AnimationOnScroll animateIn="animate__fadeInLeft" delay={50} duration={1} animateOnce={true}>
+                                    <ImageStyleWarranty src={pageHome.acf.images_warranty.group_images[elem].sizes.medium} />
+                                </AnimationOnScroll>
+                                
+                            )
+                        })
+                    }
                 </WarrantyImageGroup>
             </WarrantyGroup>       
 
@@ -267,9 +273,9 @@ const HomePage = ({state, actions, libraries}) => {
             </WarrantyGroup>          
 
             <WarrantyGroup>
-                    <h3>We accept all cards payments</h3>
-                    <ImagesLicenses src={cardspayments} />
-                </WarrantyGroup>
+                <h3>We accept all cards payments</h3>
+                <ImagesLicenses src={cardspayments} />
+            </WarrantyGroup>
         </>
         }
         </>
@@ -297,17 +303,20 @@ const MainContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background: linear-gradient( to top, rgba(34,49,63,.7), rgba(34,49,63,.7) );
+    /* background: linear-gradient( to top, rgba(34,49,63,.7), rgba(34,49,63,.7) );
+    background-color: #f4623a; */
+    background-color: var(--brand);
     height: 1000px;
     align-items: center;
-    padding-left: 35rem;
-    padding-right: 35rem;
+    /* padding-left: 35rem;
+    padding-right: 35rem; */
+
  
-    @media(max-width: 768px) {
+    /* @media(max-width: 768px) {
         flex-basis: 100%;
         padding-left: 1rem;
         padding-right: 1rem;
-    }
+    } */
 
         h1 {
             text-transform: capitalize;
@@ -361,23 +370,49 @@ const MainContainer = styled.div`
 
 `
 
+export const SectionAbout = styled.section`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* background: linear-gradient( to top, rgba(34,49,63,.7), rgba(34,49,63,.7) );
+    background-color: #f4623a; */
+    background-color: var(--brand);
+`
+
 export const AboutContainer = styled.div`
 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #f4623a;
-    padding: 2rem 22rem;
+    padding-top: 3rem;
+    padding-bottom: 4rem;
+    width: min(80%, 77.5rem + 10vw);
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center; 
+    /* margin: 2% auto;
+    text-align: center; */
 
-    @media(max-width: 768px) {
-        padding: 1rem 0;
+    @media (min-width: 1199px) and (max-width: 1440px){
+        width: min(80%, 67.5rem + 10vw);
     }
+
+    @media (max-width: 1198px){
+        width: min(98%, 67.5rem + 10vw);
+    }
+    
+    /* padding: 4rem 22rem; */
+
+    /* @media(max-width: 768px) {
+        padding: 1rem 0;
+    } */
   
     h2{
         font-size: 2rem;
         color: #fff;
         text-align: center;
+        font-family: 'Lato', sans-serif;
     }
 
     hr {
@@ -391,21 +426,11 @@ export const AboutContainer = styled.div`
         font-size: 1.1rem;
         color: rgba(255,255,255,.5);
         text-align: justify;
-        margin-bottom: 1rem;
+        margin-bottom: 1.2rem;
         color: #fff;
+        line-height: 1.5;
+        font-family: 'Lato', sans-serif;
     }   
-
-    /* div {
-
-        display: flex;
-        justify-content: flex-start;
-        align-content: center;
-        margin: .5rem auto;
-
-        @media(max-width: 768px) {
-            justify-content: space-between;
-        }
-    } */
 `
 
 const Content = styled.div`
@@ -430,17 +455,17 @@ export const ToursContainer = styled.div`
     flex-direction: column;
     justify-content: center;
     background-color: #fff;
-    padding: 5rem 10rem;
-
-    @media(max-width: 768px) {
+    /* padding: 5rem 10rem; */
+    /* @media(max-width: 768px) {
         padding: 2rem 0;
-    }
+    } */
 
     h2{
         font-size: 2rem;
         color: #454545;
         text-align: center;
         font-weight: 400;
+        margin-top: 3rem;
     }
 
     hr {
@@ -458,12 +483,27 @@ export const IconsContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 4rem 0;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
 
     @media(max-width: 768px) {
         flex-direction: column;
         align-items: center;
         justify-content: center;
+    }
+
+
+    width: min(90%, 83.5rem + 10vw);
+    margin-left: auto;
+    margin-right: auto;
+
+    @media (min-width: 1199px) and (max-width: 1440px){
+        width: min(90%, 77.5rem + 10vw);
+    }
+
+    @media (max-width: 1198px){
+        width: min(98%, 67.5rem + 10vw);
+        padding: 1rem 0;
     }
 `;
 
@@ -472,7 +512,8 @@ const IconsInfo = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
- 
+    flex-basis: 30%;
+   
     @media(max-width: 768px) {
         margin: 1rem 0;
     }
@@ -509,7 +550,7 @@ export const FontAwesomeCardTour = styled(FontAwesomeIcon)`
 `
 
 export const ToursWrap = styled.div`
-    display: grid;
+    /* display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 2rem;
     background-color: #fff;
@@ -520,11 +561,47 @@ export const ToursWrap = styled.div`
         grid-template-columns: repeat(1, 1fr);
         grid-gap: 1rem;
         margin: 2rem 0;
+    } */
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1rem;
+    color: #444;
+    font-family: 'Lato';
+    margin-top: 2rem;
+    
+    @media (max-width: 576px){
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 1rem;
+        margin: 2rem 0;
+        /* padding-left: calc(1.5rem/2);
+        padding-right: calc(1.5rem/2); */
+    }
+
+    @media (min-width: 576px) and (max-width: 968px){
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 1rem;
+        margin: 2rem 0;
+        /* padding-left: calc(1.5rem/2);
+        padding-right: calc(1.5rem/2); */
+    }
+
+    width: min(90%, 83.5rem + 10vw);
+    margin-left: auto;
+    margin-right: auto;
+
+    @media (min-width: 1199px) and (max-width: 1440px){
+        width: min(90%, 77.5rem + 10vw);
+    }
+
+    @media (max-width: 1198px){
+        width: min(98%, 67.5rem + 10vw);
+        padding: 1rem 0;
     }
 `;
 
 export const TourItem = styled.div`
-    margin: 2rem 2rem;
+    margin: 2rem .5rem;
     box-shadow: grey 0px 15px 30px 1px;
     border-radius: .5rem;
 `;
@@ -553,9 +630,21 @@ export const InfoTour = styled.div`
             text-transform: capitalize;
         }
 
-        span {
+        /* span {
             color:#3A6F84;
             font-weight: bold;
+            background-color: #2ea44f;
+        } */
+
+        span {
+          
+            background-color: #2ea44f;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 1rem;
         }
     }
 
@@ -606,6 +695,19 @@ const WriteReviewBox = styled.div`
     @media (max-width: 768px) {
         flex-direction: column;
     } 
+
+    width: min(90%, 83.5rem + 10vw);
+    margin-left: auto;
+    margin-right: auto;
+
+    @media (min-width: 1199px) and (max-width: 1440px){
+        width: min(90%, 77.5rem + 10vw);
+    }
+
+    @media (max-width: 1198px){
+        width: min(98%, 67.5rem + 10vw);
+        padding: 1rem 0;
+    }
 `
 
 const LeftSideBox = styled.div`
@@ -657,6 +759,20 @@ const TripAdvisorReviews = styled.div`
         padding: 1rem;
         flex-direction: column;
     } 
+
+
+    width: min(90%, 83.5rem + 10vw);
+    margin-left: auto;
+    margin-right: auto;
+
+    @media (min-width: 1199px) and (max-width: 1440px){
+        width: min(90%, 77.5rem + 10vw);
+    }
+
+    @media (max-width: 1198px){
+        width: min(98%, 67.5rem + 10vw);
+        padding: 1rem 0;
+    }
 `
 
 const ReviewItem = styled.div`

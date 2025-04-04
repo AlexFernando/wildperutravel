@@ -10,9 +10,14 @@ import AllTours from './components/AllTours';
 import ContactTours from './components/ContactTours';
 import Header from './components/header/header';
 import Sacredvalley from './components/SacredValley';
+import CityTours from './components/CityTours'
 import AdventuresTours from './components/AdventuresTours';
+import HikingTours from './components/Hiking';
+import JungleTours from './components/Jungle';
+import BlogPage from './components/BlogPage'
+import BlogDetails from './components/BlogDetails'
 import PrivacyPolicy from './components/PrivacyPolicy';
-import TermsConditions from './components/TermsConditions'
+import TermsConditions from './components/TermsConditions';
 
 export let bookAdventure = '';
 export let ourTours = '';
@@ -26,7 +31,12 @@ export let destacado = '';
 export let notInclude = '';
 export let startTime = '';
 export let endTime = '';
-
+export let titleHome = '';
+export let subtitleHomeOne = '';
+export let subtitleHomeTwo = '';
+export let getStarted = '';
+export let ourGreatPackages = '';
+export let popularTours = '';
  
 const Root = ({state, actions}) => {
 
@@ -50,6 +60,12 @@ const Root = ({state, actions}) => {
             price = 'Price'
             startTime = 'Start Time'
             endTime = 'End Time'
+            titleHome = '"PERU\'S LOCAL LEADING TOUR OPERATOR"'
+            subtitleHomeOne = 'We are a company specialized in creating unique and unforgettable',
+            subtitleHomeTwo = 'experiences throughout Cusco, Perú. Our lovely home is your next Adventure Trip',
+            getStarted = 'GET STARTED',
+            ourGreatPackages = 'Our Great Tour Packages',
+            popularTours = 'Most Popular tours'
         }
 
         else if (state.theme.lang === "es") {
@@ -66,7 +82,12 @@ const Root = ({state, actions}) => {
             price = 'Precio'
             startTime = 'Inicio'
             endTime = 'Final'
-
+            titleHome = '"OPERADOR LOCAL DE TURISMO LIDER EN PERÚ"'
+            subtitleHomeOne = 'Somos una empresa especializada en crear únicos e inolvidables',
+            subtitleHomeTwo = 'experiencias a lo largo de Cusco, Perú. Nuestra encantadora ciudad es tu próximo viaje de aventura.',
+            getStarted = 'Empezar',
+            ourGreatPackages = 'Nuestros Insuperables Paquetes Turísticos',
+            popularTours = 'Tours más populares'
         }
     }, [])
 
@@ -120,6 +141,10 @@ const Root = ({state, actions}) => {
 
         {data.isTourDetails && <TourDetails /> }
 
+
+        {state.router.link === "/city-tours/" && <CityTours />}
+        {state.router.link === "/es/city-tours/" && <CityTours />}
+
         {state.router.link === "/machupicchu/" && <MachuPicchu />}
         {state.router.link === "/es/machupicchu/" && <MachuPicchu />}
 
@@ -129,11 +154,19 @@ const Root = ({state, actions}) => {
         {state.router.link === "/adventuretours/" && <AdventuresTours />}
         {state.router.link === "/es/adventuretours/" && <AdventuresTours />}
 
+        {state.router.link === "/hiking/" && <HikingTours />}
+        {state.router.link === "/es/hiking/" && <HikingTours />}
+
+        {state.router.link === "/jungle/" && <JungleTours />}
+        {state.router.link === "/es/jungle/" && <JungleTours />}
+
         {state.router.link === "/fulltours/" && <AllTours />}
         {state.router.link === "/es/fulltours/" && <AllTours />}
 
         {data.isAlltours && <TourDetails />}
-
+        {state.router.link === "/blog-page/" && <BlogPage />}
+        {state.router.link === "/es/blog-page/" && <BlogPage />}
+        {data.isBlog && <BlogDetails />}
         {state.router.link === "/contact-tour/" && <ContactTours />}
         {state.router.link === "/es/contact-tour/" && <ContactTours />}
 

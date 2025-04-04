@@ -18,11 +18,7 @@ import ReadMore from '../helpers/ReadMoreReal';
 import {MachuPicchuContainer, BackgroundColor,  ToursContainer, ToursWrap, TourItem, ImageTourStyled, InfoTour, FontAwesomeCardTour } from './AdventuresTours'
 
 
-const MachuPicchu = ({state, actions}) => {
-
-   /*  useEffect( () => {
-        actions.source.fetch("/alltours")
-    }, []) */
+const CityTours = ({state, actions}) => {
 
     useEffect( () => {
 
@@ -44,15 +40,17 @@ const MachuPicchu = ({state, actions}) => {
 
             const singleTour = state.source.alltours[id];
 
-            if(singleTour.tags.length>0 && singleTour.tags[0] === 4 || singleTour.tags[1] === 4) {
+            if(singleTour.tags.length>0 && singleTour.tags[0] === 9 || singleTour.tags[1] === 9) {
                 tours.push(singleTour);
             }
         })
     }
 
-    const pageMachu = state.source.page[40];
+    const pageMachu = state.source.page[521];
+
 
     return ( 
+
         <>
         {typeof pageMachu === "undefined" ? <Loading /> : 
         <MachuPicchuContainer>
@@ -111,7 +109,7 @@ const MachuPicchu = ({state, actions}) => {
      );
 }
 
-export default connect(MachuPicchu);
+export default connect(CityTours);
 
 
 

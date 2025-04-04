@@ -178,7 +178,7 @@ const Contact = ({state, actions, libraries}) => {
                             </IconContext.Provider>{pageFooterInfo.acf.whatsapp_info}
                         
                     </li>
-                    <li><a href="mailto:wildperutravel@gmail.com"><FontAwesomeIconStyled icon={faEnvelope}/></a>{pageFooterInfo.acf.gmail}</li>
+                    <li><a href="mailto:wildperu2@gmail.com"><FontAwesomeIconStyled icon={faEnvelope}/></a>{pageFooterInfo.acf.gmail}</li>
                     
                     <li><FontAwesomeIconStyled icon={faBuilding}/>Razón Social: Wild Perú Travel E.I.R.L </li>
                     <li><FontAwesomeIconStyled icon={faBook}/>RUC: 20603620896 </li>

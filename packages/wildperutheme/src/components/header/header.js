@@ -5,11 +5,7 @@ import Nav from "./nav";
 import MobileMenu from "./menu";
 import Image from "@frontity/components/image";
 // import Logo from '../../static/images/logo.jpeg';
-import LangSwitcher from './langSwitcher';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { FaTripadvisor, FaInstagram, FaYoutube, FaFacebook } from 'react-icons/fa';
-import { IconContext } from "react-icons";
 
 const Header = ({ state }) => {
   return (
@@ -17,7 +13,7 @@ const Header = ({ state }) => {
       <BrandContainer>
         <StyledLink link="/">
 
-          <ImageStyled alt="logo" src={'https://wildperu2023.wildfreewalkingtours.com/wp-content/uploads/2022/04/WhatsApp-Image-2022-04-22-at-11.08.22-AM.jpeg'} />
+          <ImageStyled alt="logo" src={'https://wildperu2024.wildfreewalkingtours.com/wp-content/uploads/2022/04/WhatsApp-Image-2022-04-22-at-11.08.22-AM.jpeg'} />
          
         </StyledLink>
         
@@ -25,37 +21,6 @@ const Header = ({ state }) => {
       </BrandContainer>
       <Nav />
 
-      <SocialMediaSuperior>
-          <li>
-            <a href="https://www.facebook.com/wildperutravel/" alt="Share on Facebook" aria-label="Link to Facebook" target="_blank" rel="noreferrer">
-              <IconContext.Provider value={{ color: "black", className: "global-class-name", size: "2rem" } }>
-                <FaFacebook />
-              </IconContext.Provider> 
-            </a>
-          </li>
-          <li>
-            <a href="https://www.tripadvisor.com.pe/Attraction_Review-g294314-d14803688-Reviews-Wild_Peru_Travel-Cusco_Cusco_Region.html" alt="Share on TripAdvisor" aria-label="Link to TripAdvisor" target="_blank" rel="noreferrer">
-              <IconContext.Provider value={{ color: "black", className: "global-class-name", size: "2rem" } }>
-                <FaTripadvisor />
-              </IconContext.Provider> 
-            </a>
-          </li>
-          <li>
-            <a href="https://www.facebook.com/wildperutravel/" alt="Share on Instagram" aria-label="Link to Instagram" target="_blank" rel="noreferrer">
-              <IconContext.Provider value={{ color: "black", className: "global-class-name", size: "2rem" } }>
-                <FaInstagram />
-              </IconContext.Provider>
-            </a>
-          </li>
-          <li>
-            <a href="https://www.facebook.com/wildperutravel/" alt="Share on Youtube" aria-label="Link to Youtube" target="_blank" rel="noreferrer">
-              <IconContext.Provider value={{ color: "black", className: "global-class-name", size: "2rem" } }>
-                <FaYoutube />
-              </IconContext.Provider>
-            </a>
-          </li>
-      </SocialMediaSuperior>
-      <LangSwitcher />
     </AllNavbar>
   );
 };
@@ -72,7 +37,7 @@ const AllNavbar = styled.div`
     z-index: 10;
     background-color: #fff;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     width: 100%;
     height: 15vh;
@@ -84,12 +49,13 @@ const AllNavbar = styled.div`
 const BrandContainer = styled.div`
   box-sizing: border-box;
   color: var(--brand);
-  background-color: #fff;
   width: 100%;
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     display: flex;
     width: auto;
   }
+  margin-left: auto;
+  /* margin-right: auto; */
 `;
 
 const Title = styled.div`
@@ -118,45 +84,10 @@ const ImageStyled = styled(Image)`
     border-radius: 50%; 
 
     @media(min-width: 768px) {
-          width: 120px;
-          height: 120px;
+          width: 110px;
+          height: 110px;
           margin-top: 0;
-          margin-left: 10rem;
+          margin-left: auto;
     }
 `
 
-const FontAwesomeIconStyled = styled(FontAwesomeIcon)`
- 
-    font-size: 2rem;
-
-    @media(max-width: 768px) {
-        font-size : 1.8rem;
-
-    }
-`;
-
-const SocialMediaSuperior = styled.ul`
-
-    display: flex;
-
-    @media(max-width: 768px) {
-        display: none;
-    }
-
-    li {
-        list-style: none;
-        font-weight: 100;
-        letter-spacing: 1px;
-        font-size: 1rem;
-        margin-right: 1rem;
-
-        @media(max-width: 768px) {
-          margin-right: .5rem;
-        }
-
-        a {
-            text-decoration: none;
-            color: #262626;
-        }
-    }
-`

@@ -20,6 +20,8 @@ import useFilterTags from './UseFilterTags';
 import { AnimationOnScroll } from 'react-animation-on-scroll';
 import ScrollAnimations from "animate.css/animate.min.css";
 
+import ReadMoreCard from '../helpers/ReadMoreCard';
+
 const FullTours = ({state, actions}) => {
 
     const {allCategory, FilterSubcategoriesUI} = useFilterTags("");
@@ -76,9 +78,9 @@ const FullTours = ({state, actions}) => {
 
                 <h3>{pageAllTours.acf.title}</h3>         
 
-                <AnimationOnScroll animateIn="animate__fadeIn" delay={100} duration={1.5} animateOnce={true}>
+                {/* <AnimationOnScroll animateIn="animate__fadeIn" delay={100} duration={1.5} animateOnce={true}>
                     <h3>{pageAllTours.acf.title}</h3>
-                </AnimationOnScroll>        
+                </AnimationOnScroll>         */}
             </BackgroundColor>  
 
 
@@ -109,16 +111,18 @@ const FullTours = ({state, actions}) => {
                                             <InfoTour>
                                                 <h3>{tour.acf.title}</h3>
 
-                                                <p>{tour.acf.description}</p>
+                                                {/* <p>{tour.acf.description}</p> */}
                                                 
+                                                <ReadMoreCard content= {tour.acf.description} limit={40} />
+
                                                 <div>
                                                     <p><FontAwesomeCardTour icon={faClock} />{tour.acf.full_days}</p>
                                                     <span>{tour.acf.price}</span>
                                                 </div>
-
+{/* 
                                                 <ViewMoreWrapper>
                                                     <LinkButtonHomeSecond href={tour.link}>{ourTours}</LinkButtonHomeSecond>    
-                                                </ViewMoreWrapper>    
+                                                </ViewMoreWrapper>     */}
                                             </InfoTour>
                                         </Link>
                                             
@@ -147,16 +151,17 @@ const FullTours = ({state, actions}) => {
                                                 <InfoTour>
                                                     <h3>{tour.acf.title}</h3>
 
-                                                    <p>{tour.acf.description}</p>
+                                                    {/* <p>{tour.acf.description}</p> */}
+                                                    <ReadMoreCard content= {tour.acf.description} limit={40} />
                                                     
                                                     <div>
                                                         <p><FontAwesomeCardTour icon={faClock} />{tour.acf.full_days}</p>
-                                                        <span>{tour.acf.price}</span>
+                                                        <span>{tour.acf.price}</span>cd 
                                                     </div>
 
-                                                    <ViewMoreWrapper>
+                                                    {/* <ViewMoreWrapper>
                                                         <LinkButtonHomeSecond href={tour.link}>{ourTours}</LinkButtonHomeSecond>    
-                                                    </ViewMoreWrapper>    
+                                                    </ViewMoreWrapper>     */}
                                                 </InfoTour>
                                             </Link>
                                                 
